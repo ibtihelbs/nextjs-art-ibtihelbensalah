@@ -48,14 +48,12 @@ export function EmbeddedForm() {
       onSubmit={subscribeUser}
       className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md"
     >
-      <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
+      <h2 className="text-2xl font-bold mb-6 text-center ">
         Subscribe to our newsletter!
       </h2>
       <div className="space-y-4">
         <label className="block">
-          <span className="text-gray-700 text-sm font-medium block mb-1">
-            First name
-          </span>
+          <span className=" text-sm font-medium block mb-1">First name</span>
           <input
             name="firstName"
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"

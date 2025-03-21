@@ -22,19 +22,19 @@ export default async function IndexPage() {
 
   return (
     <main className="container mx-auto min-h-screen max-w-3xl p-8">
-      <h1 className="text-4xl font-bold mb-8">Artworks</h1>
-      <ul className="flex flex-col gap-y-6">
+      <h1 className="text-4xl font-bold mb-8 text-center">Freebies</h1>
+      <ul className="grid md:grid-cols-2 md:gap-3 lg:grid-cols-3 gap-y-6">
         {artworks.map((artwork) => (
           <li key={artwork._id} className="hover:underline">
             <Link
               href={`/${artwork.slug.current}`}
-              className="flex items-center gap-4"
+              className="grid items-center gap-4"
             >
               {artwork.image && (
                 <img
-                  src={urlFor(artwork.image).width(100).height(100).url()}
+                  src={urlFor(artwork.image).width().height().url()}
                   alt={artwork.title}
-                  className="w-24 h-24 object-cover rounded-lg"
+                  className="w-full h-40 object-cover rounded-lg"
                 />
               )}
               <div>
