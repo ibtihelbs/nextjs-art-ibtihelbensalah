@@ -54,7 +54,7 @@ export const Contact = () => {
             />
           </div>
         </div>
-        <div className="vr grid gap-3">
+        <div className="md:vr grid gap-3">
           <div className="grid gap-2">
             <label>Message</label>
             <textarea
