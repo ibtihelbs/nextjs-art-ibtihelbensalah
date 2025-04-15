@@ -21,7 +21,7 @@ const Hero = async () => {
   return (
     <section className="grid lg:grid-cols-4 w-full min-h-[70vh] gap-6 ">
       <div className="lg:col-span-3 grid md:grid-cols-3 gap-3">
-        <div className="w-screen h-[72vh] md:w-full md:h-full bg-red-300 col-span-2 relative">
+        <div className="w-full h-[72vh] md:w-full md:h-full bg-red-300 col-span-2 relative">
           <Image
             src={urlFor(blog.image).width().url()}
             alt="blog"
@@ -29,7 +29,7 @@ const Hero = async () => {
             className="fit-cover"
           />
           <div className="block md:hidden absolute top-1/3">
-            <XlTitle content={blog.title} className={"text-start "} />
+            <XlTitle content={blog.title} className={"text-start"} />
             <div className="hidden md:block max-w-none  ">
               <PortableText
                 value={blog.content.slice(0, 1)}
