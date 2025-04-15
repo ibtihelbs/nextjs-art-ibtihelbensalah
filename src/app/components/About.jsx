@@ -1,9 +1,11 @@
 import { XlTitle } from "./Text";
-
+import Image from "next/image";
 const About = () => {
   return (
     <section className="grid grid-cols-3 gap-8 md:h-screen bg-orange-200 w-full">
-      <div className="h-full bg-red-400 "></div>
+      <div className="h-full bg-red-400 relative">
+        <Image src={"/about.jpg"} alt="about" fill className="fit-cover" />
+      </div>
       <div className="vr col-span-2 grid gap-1 max-w-[500px] ">
         <XlTitle content={"About me"} className={"md:text-6xl md:text-start"} />
         <p>

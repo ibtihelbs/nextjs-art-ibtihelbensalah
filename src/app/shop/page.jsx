@@ -27,7 +27,7 @@ export default async function IndexPage() {
         {artworks.map((artwork) => (
           <li key={artwork._id} className="hover:underline">
             <Link
-              href={`/${artwork.slug.current}`}
+              href={`/shop/${artwork.slug.current}`}
               className="grid items-center gap-4"
             >
               {artwork.image && (
