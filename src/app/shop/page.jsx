@@ -19,9 +19,9 @@ const options = { next: { revalidate: 30 } };
 
 export default async function IndexPage() {
   const artworks = await client.fetch(ARTWORKS_QUERY, {}, options);
-
+  console.log(artworks);
   return (
-    <main className="container mx-auto min-h-screen max-w-3xl p-8">
+    <main className="container mx-auto min-h-screen  md:py-8">
       <h1 className="text-4xl font-bold mb-8 text-center">Freebies</h1>
       <ul className="grid md:grid-cols-2 md:gap-3 lg:grid-cols-3 gap-y-6">
         {artworks.map((artwork) => (
@@ -34,7 +34,7 @@ export default async function IndexPage() {
                 <img
                   src={urlFor(artwork.image).width().height().url()}
                   alt={artwork.title}
-                  className="w-full h-40 object-cover rounded-lg"
+                  className="w-full h-[300px] object-cover rounded-lg"
                 />
               )}
               <div>
