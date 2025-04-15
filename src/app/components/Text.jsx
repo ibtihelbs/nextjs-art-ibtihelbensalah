@@ -4,7 +4,7 @@ const Text = ({ content }) => {
 const XlTitle = ({ content, className }) => {
   return (
     <h1
-      className={`font-[family-name:var(--font-title)] font-black uppercase text-4xl tracking-tight text-center ${className}`}
+      className={`font-[family-name:var(--font-title)] font-black uppercase lg:text-4xl text-2xl tracking-tight text-center ${className}`}
     >
       {content}
     </h1>

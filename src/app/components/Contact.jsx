@@ -29,7 +29,11 @@ export const Contact = () => {
         <XlTitle content={"contact"} className={"md:6xl"} />
         <hr className="border-2" />
       </div>
-      <form ref={form} className="grid grid-cols-2 gap-8" onSubmit={sendEmail}>
+      <form
+        ref={form}
+        className="grid md:grid-cols-2 gap-8"
+        onSubmit={sendEmail}
+      >
         <div className=" grid gap-3">
           <div className="grid gap-2">
             <label>Name</label>

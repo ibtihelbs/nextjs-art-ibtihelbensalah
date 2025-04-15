@@ -19,22 +19,49 @@ const Hero = async () => {
   const blog = await client.fetch(query);
 
   return (
-    <section className="grid grid-cols-4 w-full min-h-[70vh] gap-6 ">
-      <div className="col-span-3 grid grid-cols-3 gap-3">
-        <div className="w-full h-full bg-red-300 col-span-2 relative">
+    <section className="grid lg:grid-cols-4 w-full min-h-[70vh] gap-6 ">
+      <div className="lg:col-span-3 grid md:grid-cols-3 gap-3">
+        <div className="w-screen h-[70vh] md:w-full md:h-full bg-red-300 col-span-2 relative">
           <Image
             src={urlFor(blog.image).width().url()}
             alt="blog"
             fill
             className="fit-cover"
           />
+          <div className="block md:hidden absolute top-1/2">
+            <XlTitle content={blog.title} className={"text-start "} />
+            <div className="hidden md:block max-w-none  ">
+              <PortableText
+                value={blog.content.slice(0, 1)}
+                className="text-ellipsis "
+              />
+            </div>
+            <div className="flex gap-2"></div>
+            <Link
+              href={"./blog/" + blog.slug.current}
+              className=" border-solid border-2 rounded-full float-right px-4 py-1"
+            >
+              {" "}
+              read more...{" "}
+            </Link>
+          </div>
+          <div className=" flex absolute bottom-0 w-full  whitespace-nowrap">
+            <XlTitle
+              content={
+                "Élan Créatif * 12 April - 5 mai * Tunis * st-croix * medina"
+              }
+              className={
+                " text-6xl  overflow-hidden text-start whitespace-nowrap bg-yellow-400"
+              }
+            />
+          </div>
         </div>
-        <div>
-          <XlTitle content={blog.title} className={"text-start"} />
-          <div className="prose max-w-none  ">
+        <div className="md:block hidden">
+          <XlTitle content={blog.title} className={"text-start "} />
+          <div className="hidden md:block max-w-none  ">
             <PortableText
               value={blog.content.slice(0, 1)}
-              className="text-ellipsis"
+              className="text-ellipsis "
             />
           </div>
           <div className="flex gap-2"></div>
@@ -46,16 +73,8 @@ const Hero = async () => {
             read more...{" "}
           </Link>
         </div>
-        <div className="col-span-3 flex gap-3 whitespace-nowrap">
-          <XlTitle
-            content={"predule creative predule creative predule creative"}
-            className={
-              " text-6xl  overflow-hidden text-start whitespace-nowrap bg-yellow-400"
-            }
-          />
-        </div>
       </div>
-      <div className=" vr">
+      <div className=" vr hidden lg:block">
         <div className="relative h-2/3">
           <Image src={"/wallpaper.jpg"} alt="wallpaper" fill />
         </div>
