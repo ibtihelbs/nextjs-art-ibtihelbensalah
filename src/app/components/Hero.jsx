@@ -3,6 +3,7 @@ import { client } from "@/sanity/client";
 import { PortableText } from "@portabletext/react";
 import { urlFor } from "@/sanity/imageUrl";
 import { XlTitle } from "./Text";
+import InfiniteScroll from "./animation/InfiniteScroll";
 import Link from "next/link";
 const Hero = async () => {
   const query = `*[_type == "blog" && slug.current == "elan-creatif-my-watercolors-on-display-in-the-heart-of-tunis"][0] {
@@ -45,18 +46,20 @@ const Hero = async () => {
               read more...{" "}
             </Link>
           </div>
-          <div className=" flex absolute bottom-0 w-full  whitespace-nowrap">
-            <XlTitle
-              content={
-                "Élan Créatif * 12 April - 5 mai * Tunis * st-croix * medina"
-              }
-              className={
-                " text-6xl  overflow-hidden text-start whitespace-nowrap bg-yellow-400"
-              }
-            />
+          <div className=" flex absolute bottom-0 w-full bg-yellow-400 whitespace-nowrap">
+            <InfiniteScroll>
+              <XlTitle
+                content={
+                  "Élan Créatif * 12 April - 5 mai * Tunis * st-croix * medina"
+                }
+                className={
+                  " text-6xl  overflow-hidden text-start whitespace-nowrap "
+                }
+              />
+            </InfiniteScroll>
           </div>
         </div>
-        <div className="md:block hidden">
+        <div className="md:grid hidden  gap-2 justify-items-end">
           <XlTitle content={blog.title} className={"text-start "} />
           <div className="hidden md:block max-w-none  ">
             <PortableText
@@ -74,8 +77,8 @@ const Hero = async () => {
           </Link>
         </div>
       </div>
-      <div className=" vr hidden lg:block">
-        <div className="relative h-2/3">
+      <div className=" vr hidden lg:grid gap-2 content-start justify-items-end">
+        <div className="relative w-full bg-red-500 h-[300px] ">
           <Image src={"/wallpaper.jpg"} alt="wallpaper" fill />
         </div>
         <XlTitle content={"wallpaper collection"} />
