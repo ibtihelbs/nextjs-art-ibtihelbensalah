@@ -26,7 +26,7 @@ export default async function PostPage({ params }) {
     // Query for the specific artwork by slug
     const POST_QUERY = `*[_type == "artwork" && slug.current == $slug][0]`;
     const post = await client.fetch(POST_QUERY, { slug });
-
+    console.log(post);
     if (!post) {
       console.log("No artwork found with slug:", slug);
       notFound();

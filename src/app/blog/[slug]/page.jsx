@@ -3,7 +3,6 @@ import { PortableText } from "@portabletext/react";
 import Image from "next/image";
 import { urlFor } from "../../../sanity/imageUrl";
 import { XlTitle } from "../../components/Text";
-import { span } from "motion/react-client";
 const query = `*[_type == "blog" && slug.current == $slug][0] {
   _id,
   title,
@@ -28,7 +27,9 @@ const page = async ({ params }) => {
         </p>
         <div className="flex gap-1">
           {blog.categories.map((v, i) => (
-            <span className="px-3 py-1 rounded-full border">{v}</span>
+            <span className="px-3 py-1 rounded-full border" key={i}>
+              {v}
+            </span>
           ))}
         </div>
       </div>

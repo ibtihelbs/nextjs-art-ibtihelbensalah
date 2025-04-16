@@ -1,6 +1,11 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { XlTitle } from "@/app/components/Text";
+import { useEffect, useState } from "react";
+import { motion, useScroll, useMotionValueEvent } from "framer-motion";
+
 const socialLinks = [
   {
     src: "/png/008-tiktok.png",
@@ -21,15 +26,35 @@ const socialLinks = [
 ];
 
 const Nav = () => {
+  const [isVisible, setIsVisible] = useState(true);
+  const { scrollY } = useScroll();
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    const previous = scrollY.getPrevious();
+    if (latest > previous && latest > 150) {
+      setIsVisible(false);
+    } else if (latest < previous || latest < 10) {
+      setIsVisible(true);
+    }
+  });
+
   return (
-    <header>
+    <motion.header
+      initial={{ y: 0 }}
+      animate={{ y: isVisible ? 0 : -100 }}
+      transition={{ type: "spring", damping: 20, stiffness: 300 }}
+      className="sticky top-0 z-50 bg-white shadow-sm"
+    >
       <hr />
       <div className="upper-nav flex gap-4 justify-between items-start bg-red">
-        <p className=" text-sm text-slate-800 font-medium underline">
-          {" "}
-          April 09, 2025{" "}
+        <p className="text-sm text-slate-800 font-medium underline">
+          {new Date().toLocaleDateString("en-US", {
+            month: "long",
+            day: "numeric",
+            year: "numeric",
+          })}
         </p>
-        <div className="middle-nav grid place-content-center ">
+        <div className="middle-nav grid place-content-center">
           <XlTitle content={"IBTIHEL"} className={"md:text-6xl"} />
           <XlTitle content={"BEN SALAH"} className={"md:text-4xl"} />
         </div>
@@ -40,6 +65,7 @@ const Nav = () => {
               key={i}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label={`Social media link ${i}`}
             >
               <Image src={link.src} alt="social icon" width={20} height={20} />
             </a>
@@ -54,13 +80,13 @@ const Nav = () => {
             <Link href={"/"}>home</Link>
           </li>
           <li>
-            <Link href={"/blog"}> Blog </Link>
+            <Link href={"/blog"}>Blog</Link>
           </li>
         </ul>
 
         <ul className="flex gap-2">
           <li>
-            <Link href={"/shop"}> shop </Link>
+            <Link href={"/shop"}>shop</Link>
           </li>
           <li>
             <Link href={"/#contact"}>contact</Link>
@@ -68,7 +94,7 @@ const Nav = () => {
         </ul>
       </nav>
       <hr />
-    </header>
+    </motion.header>
   );
 };
 

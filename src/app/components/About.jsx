@@ -1,42 +1,53 @@
 import { XlTitle } from "./Text";
 import Image from "next/image";
-const About = () => {
+import { client } from "@/sanity/client";
+import { urlFor } from "@/sanity/imageUrl";
+import { PortableText } from "@portabletext/react";
+
+const About = async () => {
+  const ABOUT_QUERY = `*[
+    _type == "about"
+    
+  ]{
+    _id,
+    title,
+    slug,
+    content,
+    image,
+  }`;
+
+  const about = await client.fetch(ABOUT_QUERY);
+  console.log(about);
   return (
-    <section className="grid grid-cols-3 gap-8 md:h-screen bg-orange-200 w-full">
-      <div className="h-full bg-red-400 relative">
-        <Image src={"/about.jpg"} alt="about" fill className="fit-cover" />
-      </div>
-      <div className="vr col-span-2 grid gap-1 max-w-[500px] ">
-        <XlTitle content={"About me"} className={"md:text-6xl md:text-start"} />
-        <p>
-          Hi, I’m <strong>Ibtihel Ben Salah</strong> — an artist, illustrator,
-          and visual storyteller based in Hammam Lif, Tunisia. My work blends
-          vibrant color, cultural memory, and a touch of playfulness. I paint
-          what speaks to me: Tunisian architecture, food, nature, and still
-          moments that often go unnoticed.
-        </p>
-        <hr />
-        <p>
-          I work mainly with watercolor, gouache, acrylic, and colored pencils
-          from a local brand I love. My style mixes bold palettes with soft
-          details, and lately, I’ve been exploring ways to merge traditional
-          subjects with unexpected, modern twists — like graffiti words hidden
-          in architectural pieces.
-        </p>
-        <hr />
-        <p>
-          After reconnecting with art six years ago, I’ve been steadily building
-          a body of work that feels honest and rooted. In 2024, one of my
-          paintings was selected and purchased by the state of St. Croix during{" "}
-          <em>Prelude Créatif</em> — a moment that affirmed my path as an
-          exhibiting artist.
-        </p>
-        <hr />
-        <p>
-          Through my art, I aim to create pieces that feel personal yet familiar
-          — whether it’s for collectors, brands, or anyone drawn to stories told
-          through color and form.
-        </p>
+    <section className="grid gap-8  bg-orange-200 w-full p-6">
+      {/* Left section with static image */}
+      <XlTitle content="About me" className="md:text-6xl md:text-start" />
+
+      {/* Right section with title and artworks */}
+      <div className="col-span-2 grid gap-6">
+        <div className="">
+          {about.reverse().map((item) => (
+            <div
+              key={item._id}
+              className="sticky top-0 bg-white rounded shadow overflow-hidden grid grid-cols-3"
+            >
+              <Image
+                src={urlFor(item.image).width().height().url()}
+                alt={item.title}
+                width={400}
+                height={600}
+                className="object-cover w-full h-auto"
+              />
+              <div className="p-3">
+                <h3 className="text-sm font-semibold">{item.title}</h3>
+                <p> {item.content} </p>
+                <div className="prose max-w-none">
+                  <PortableText value={item.content} />
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
