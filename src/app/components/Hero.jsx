@@ -6,7 +6,7 @@ import { XlTitle } from "./Text";
 import InfiniteScroll from "./animation/InfiniteScroll";
 import Link from "next/link";
 const Hero = async () => {
-  const query = `*[_type == "blog" && slug.current == "elan-creatif-my-watercolors-on-display-in-the-heart-of-tunis"][0] {
+  const query = `*[_type == "blog" && slug.current == "colors-of-tunisia-exhibiting-watercolors-in-the-historic-medina"][0] {
     _id,
     title,
     slug,
