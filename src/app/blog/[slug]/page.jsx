@@ -3,6 +3,7 @@ import { PortableText } from "@portabletext/react";
 import Image from "next/image";
 import { urlFor } from "../../../sanity/imageUrl";
 import { XlTitle } from "../../components/Text";
+import { span } from "motion/react-client";
 const query = `*[_type == "blog" && slug.current == $slug][0] {
   _id,
   title,
@@ -18,7 +19,6 @@ const query = `*[_type == "blog" && slug.current == $slug][0] {
 const page = async ({ params }) => {
   const { slug } = params;
   const blog = await client.fetch(query, { slug });
-
   return (
     <article className="max-w-3xl mx-auto px-4 py-10 space-y-6">
       <XlTitle content={blog.title} />
@@ -26,7 +26,11 @@ const page = async ({ params }) => {
         <p className="text-sm text-gray-500">
           {new Date(blog.publishedAt).toLocaleDateString()}
         </p>
-        <span> {blog.categories} </span>
+        <div className="flex gap-1">
+          {blog.categories.map((v, i) => (
+            <span className="px-3 py-1 rounded-full border">{v}</span>
+          ))}
+        </div>
       </div>
 
       {blog.image && (
