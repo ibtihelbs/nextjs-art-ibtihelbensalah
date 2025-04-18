@@ -19,7 +19,6 @@ const options = { next: { revalidate: 30 } };
 
 export default async function IndexPage() {
   const artworks = await client.fetch(ARTWORKS_QUERY, {}, options);
-  console.log(artworks);
   return (
     <main className="container mx-auto min-h-screen  md:py-8">
       <h1 className="text-4xl font-bold mb-8 text-center">Freebies</h1>

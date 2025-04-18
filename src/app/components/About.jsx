@@ -17,7 +17,6 @@ const About = async () => {
   }`;
 
   const about = await client.fetch(ABOUT_QUERY);
-  console.log(about);
   return (
     <section className="grid gap-8  bg-orange-200 w-full p-6">
       {/* Left section with static image */}

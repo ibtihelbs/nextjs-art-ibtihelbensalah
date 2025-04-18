@@ -2,11 +2,11 @@ import imageUrlBuilder from "@sanity/image-url";
 import { client } from "@/sanity/client";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-
+import Download from "@/app/components/Download";
 const { projectId, dataset } = client.config();
 const builder = imageUrlBuilder({ projectId, dataset });
 const urlFor = (source) => (source ? builder.image(source) : null);
-
+console.log({ projectId, dataset });
 // Add a helper function to get file URLs
 const getFileUrl = (file) => {
   if (!file || !file.asset || !file.asset._ref) {
@@ -20,18 +20,16 @@ const getFileUrl = (file) => {
 
 export default async function PostPage({ params }) {
   try {
-    const { slug } = params;
-    console.log("Fetching artwork with slug:", slug);
+    const { slug } = await params;
 
     // Query for the specific artwork by slug
     const POST_QUERY = `*[_type == "artwork" && slug.current == $slug][0]`;
     const post = await client.fetch(POST_QUERY, { slug });
-    console.log(post);
     if (!post) {
       console.log("No artwork found with slug:", slug);
       notFound();
     }
-
+    console.log(post);
     return (
       <main className="container mx-auto min-h-screen max-w-7xl p-8">
         <Link href="/shop" className="hover:underline mb-8 block">
@@ -139,15 +137,12 @@ export default async function PostPage({ params }) {
                 <h3 className="text-lg font-medium mb-2">Digital Files</h3>
                 <ul className=" pl-5">
                   {post.digitalFiles.map((file, index) => (
-                    <li key={index}>
-                      <a
-                        href={getFileUrl(file)}
-                        download={file.originalFilename || `File-${index + 1}`}
-                        className="bg-blue-600 text-white hover:underline"
-                      >
-                        Download {file.originalFilename || `File ${index + 1}`}
-                      </a>
-                    </li>
+                    <Download
+                      file={file}
+                      key={index}
+                      dataset={dataset}
+                      projectId={projectId}
+                    />
                   ))}
                 </ul>
               </div>
