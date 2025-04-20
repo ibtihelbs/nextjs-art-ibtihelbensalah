@@ -47,7 +47,7 @@ export default function DownloadButton({ file, dataset, projectId }) {
   return (
     <button
       onClick={handleDownload}
-      className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
+      className="px-4 py-2 bg-yellow-600  rounded-full hover:bg-yellow-700 transition-colors"
     >
       {file.originalFilename || "Download File"}
     </button>

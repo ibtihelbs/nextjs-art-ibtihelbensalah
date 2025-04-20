@@ -3,16 +3,13 @@ import { client } from "@/sanity/client";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Download from "@/app/components/Download";
+
 const { projectId, dataset } = client.config();
 const builder = imageUrlBuilder({ projectId, dataset });
 const urlFor = (source) => (source ? builder.image(source) : null);
-console.log({ projectId, dataset });
-// Add a helper function to get file URLs
+
 const getFileUrl = (file) => {
-  if (!file || !file.asset || !file.asset._ref) {
-    return null;
-  }
-  // Convert the Sanity file reference to a downloadable URL
+  if (!file?.asset?._ref) return null;
   return `https://cdn.sanity.io/files/${projectId}/${dataset}/${file.asset._ref
     .replace("file-", "")
     .replace("-", ".")}`;
@@ -22,14 +19,13 @@ export default async function PostPage({ params }) {
   try {
     const { slug } = await params;
 
-    // Query for the specific artwork by slug
     const POST_QUERY = `*[_type == "artwork" && slug.current == $slug][0]`;
     const post = await client.fetch(POST_QUERY, { slug });
+
     if (!post) {
-      console.log("No artwork found with slug:", slug);
       notFound();
     }
-    console.log(post);
+
     return (
       <main className="container mx-auto min-h-screen max-w-7xl p-8">
         <Link href="/shop" className="hover:underline mb-8 block">
@@ -64,23 +60,43 @@ export default async function PostPage({ params }) {
                   <h3 className="text-sm font-medium text-gray-500">
                     Category
                   </h3>
-                  <p>{post.category}</p>
+                  <Link
+                    href={`/shop?category=${encodeURIComponent(post.category)}`}
+                    className="text-blue-600 hover:underline"
+                  >
+                    {post.category}
+                  </Link>
                 </div>
               )}
 
               {post.medium && (
                 <div>
                   <h3 className="text-sm font-medium text-gray-500">Medium</h3>
-                  <p>{post.medium}</p>
+                  <Link
+                    href={`/shop?medium=${encodeURIComponent(post.medium)}`}
+                    className="text-blue-600 hover:underline"
+                  >
+                    {post.medium}
+                  </Link>
                 </div>
               )}
 
-              {post.editions && post.editions.length > 0 && (
+              {post.editions?.length > 0 && (
                 <div>
                   <h3 className="text-sm font-medium text-gray-500">
                     Editions
                   </h3>
-                  <p>{post.editions.join(", ")}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {post.editions.map((edition) => (
+                      <Link
+                        key={edition}
+                        href={`/shop?edition=${encodeURIComponent(edition)}`}
+                        className="bg-gray-100 px-3 py-1 rounded-full text-sm hover:bg-gray-200"
+                      >
+                        {edition}
+                      </Link>
+                    ))}
+                  </div>
                 </div>
               )}
 
@@ -89,7 +105,7 @@ export default async function PostPage({ params }) {
                   <h3 className="text-sm font-medium text-gray-500">Price</h3>
                   <p>
                     $
-                    {post.price.toFixed(2) == 0
+                    {post.price.toFixed(2) === "0.00"
                       ? "free"
                       : post.price.toFixed(2)}
                   </p>
@@ -97,49 +113,47 @@ export default async function PostPage({ params }) {
               )}
             </div>
 
-            {post.tags && post.tags.length > 0 && (
+            {post.tags?.length > 0 && (
               <div className="mb-6">
                 <h3 className="text-sm font-medium text-gray-500 mb-2">Tags</h3>
                 <div className="flex flex-wrap gap-2">
                   {post.tags.map((tag) => (
-                    <span
+                    <Link
                       key={tag}
-                      className="border border-white px-3 py-1 rounded-full text-sm"
+                      href={`/shop?tag=${encodeURIComponent(tag)}`}
+                      className="border border-white px-3 py-1 rounded-full text-sm hover:bg-gray-100"
                     >
                       {tag}
-                    </span>
+                    </Link>
                   ))}
                 </div>
               </div>
             )}
 
-            {post.files && post.files.length > 0 && (
+            {post.files?.length > 0 && (
               <div className="mb-6">
                 <h3 className="text-lg font-medium mb-2">Printable Files</h3>
                 <ul className="list-disc pl-5">
                   {post.files.map((file, index) => (
-                    <li key={index}>
-                      <a
-                        href={getFileUrl(file)}
-                        download={file.originalFilename || `File-${index + 1}`}
-                        className="text-blue-600 hover:underline"
-                      >
-                        Download {file.originalFilename || `File ${index + 1}`}
-                      </a>
-                    </li>
+                    <Download
+                      key={index}
+                      file={file}
+                      dataset={dataset}
+                      projectId={projectId}
+                    />
                   ))}
                 </ul>
               </div>
             )}
 
-            {post.digitalFiles && post.digitalFiles.length > 0 && (
+            {post.digitalFiles?.length > 0 && (
               <div className="mb-6">
                 <h3 className="text-lg font-medium mb-2">Digital Files</h3>
-                <ul className=" pl-5">
+                <ul>
                   {post.digitalFiles.map((file, index) => (
                     <Download
-                      file={file}
                       key={index}
+                      file={file}
                       dataset={dataset}
                       projectId={projectId}
                     />
