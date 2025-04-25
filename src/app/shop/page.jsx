@@ -50,9 +50,9 @@ export default async function IndexPage({ searchParams }) {
     <main className="container mx-auto min-h-screen  md:py-8">
       {value ? <Link href={"/shop"}>back to shop</Link> : ""}{" "}
       <XlTitle content={value || "shop"} />
-      <ul className="grid md:grid-cols-2 md:gap-3 lg:grid-cols-3 gap-y-6">
+      <ul className="grid  md:grid-cols-2 md:gap-4 lg:grid-cols-3 gap-y-6">
         {artworks.map((artwork) => (
-          <li key={artwork._id}>
+          <li key={artwork._id} className="grid gap-2">
             {artwork.image && (
               <img
                 src={urlFor(artwork.image).width().height().url()}
@@ -60,10 +60,12 @@ export default async function IndexPage({ searchParams }) {
                 className="w-full h-[300px] object-cover rounded-lg"
               />
             )}
-            <div className="grid ">
-              <h2 className="text-xl font-semibold">{artwork.title}</h2>
-              <div className="flex justify-between">
-                <p className="text-sm flex gap-2 text-gray-500">
+            <div className="grid gap-1 ">
+              <h2 className="text-xl self-start font-semibold whitespace-nowrap overflow-hidden text-ellipsis ">
+                {artwork.title}
+              </h2>
+              <div className="flex justify-between items-start">
+                <p className="text-sm flex gap-2  text-gray-500">
                   <Link href={`/shop?category=${artwork.category}`}>
                     {artwork.category}
                   </Link>
@@ -80,6 +82,7 @@ export default async function IndexPage({ searchParams }) {
                 </Link>
               </div>
             </div>
+            
           </li>
         ))}
       </ul>

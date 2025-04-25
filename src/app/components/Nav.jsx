@@ -38,6 +38,7 @@ const Nav = () => {
     }
   });
 
+  
   return (
     <motion.header
       initial={{ y: 0 }}
@@ -45,20 +46,17 @@ const Nav = () => {
       transition={{ type: "spring", damping: 20, stiffness: 300 }}
       className="sticky top-0 z-50 bg-white shadow-sm"
     >
-      <hr />
-      <div className="upper-nav flex gap-4 justify-between items-start bg-red">
-        <p className="text-sm text-slate-800 font-medium underline">
+      <div className="upper-nav flex gap-4 justify-between items-center bg-red">
+        <p className="text-sm text-slate-800 font-medium underline text-nowrap">
           {new Date().toLocaleDateString("en-US", {
             month: "long",
             day: "numeric",
             year: "numeric",
           })}
         </p>
-        <div className="middle-nav grid place-content-center">
-          <XlTitle content={"IBTIHEL"} className={"md:text-6xl"} />
-          <XlTitle content={"BEN SALAH"} className={"md:text-4xl"} />
-        </div>
-        <div className="flex gap-2">
+
+        <hr className="w-full border-4" />
+        <div className="flex gap-1">
           {socialLinks.map((link, i) => (
             <a
               href={link.href}
@@ -71,6 +69,10 @@ const Nav = () => {
             </a>
           ))}
         </div>
+      </div>
+      <div className="middle-nav grid place-content-center">
+        <XlTitle content={"IBTIHEL"} className={"md:text-9xl"} />
+        <XlTitle content={"BEN SALAH"} className={"md:text-4xl"} />
       </div>
       <hr />
 
