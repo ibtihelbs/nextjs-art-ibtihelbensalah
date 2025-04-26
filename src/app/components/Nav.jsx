@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { XlTitle } from "@/app/components/Text";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 
 const socialLinks = [
@@ -38,13 +38,12 @@ const Nav = () => {
     }
   });
 
-  
   return (
     <motion.header
       initial={{ y: 0 }}
       animate={{ y: isVisible ? 0 : -100 }}
       transition={{ type: "spring", damping: 20, stiffness: 300 }}
-      className="sticky top-0 z-50 bg-white shadow-sm"
+      className="sticky top-0 z-50 bg-white "
     >
       <div className="upper-nav flex gap-4 justify-between items-center bg-red">
         <p className="text-sm text-slate-800 font-medium underline text-nowrap">

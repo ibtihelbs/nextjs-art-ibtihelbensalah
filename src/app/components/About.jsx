@@ -15,15 +15,13 @@ const About = async () => {
   const about = await client.fetch(ABOUT_QUERY);
 
   return (
-    <section className="grid gap-8 w-full p-6">
+    <section className="grid gap-8 w-full py-6 ">
       {/* Right section with title and artworks */}
-      <div className="grid gap-6 justify-items-center content-center">
-        {about.reverse().map((item, index) => {
-          // Use useScroll with viewport instead of useRef
+      {about.reverse().map((item, index) => {
+        // Use useScroll with viewport instead of useRef
 
-          return <AboutItem item={item} index={index} />;
-        })}
-      </div>
+        return <AboutItem item={item} key={index} index={index} />;
+      })}
     </section>
   );
 };
