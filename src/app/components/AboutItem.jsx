@@ -25,9 +25,13 @@ const AboutItem = ({ item, index }) => {
         scale,
         rotate,
       }}
-      className="sticky top-1/12 p-3 gap-5 bg-white h-[80vh] divide-dashed divide-x-3 overflow-hidden border-double border-t-5 border-b-5  grid grid-cols-3"
+      className="sticky top-1/12 p-3 gap-5 bg-white h-[80vh]  overflow-hidden border-solid   grid grid-cols-6"
     >
-      <div className="relative">
+      <XlTitle
+        className={" text-start lg:text-[140px] w-full"}
+        content={`0${index + 1}`}
+      />
+      <div className="relative col-span-2">
         <Image
           src={urlFor(item.image).width().height().url()}
           alt={item.title}
@@ -35,13 +39,17 @@ const AboutItem = ({ item, index }) => {
           className="object-cover w-full h-auto"
         />
       </div>
-      <div className=" grid content-start gap-4  col-span-2 ">
+      <div className=" grid content-start gap-4  col-span-3 ">
         <XlTitle
           content={item.title}
-          className={"bg-black text-white text-start lg:text-6xl w-full"}
+          className={"bg-black text-white text-start lg:text-[140px] w-full"}
         />
 
-        <p className="text-xl">{item.content}</p>
+        <div className="vr grid gap-3">
+          {item.content.split(".").map((p, i) => (
+            <p className="text-xl"> {p} </p>
+          ))}
+        </div>
       </div>
     </motion.div>
   );

@@ -1,15 +1,14 @@
 import type { Metadata } from "next";
-import { Geist, Simonetta } from "next/font/google";
+import { Geist } from "next/font/google";
+import { Imbue } from "next/font/google";
 import "./globals.css";
 import Nav from "./components/Nav";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
-const title = Simonetta({
+const title = Imbue({
   variable: "--font-title",
-  subsets: ["latin"],
-  weight: ["400", "900"],
 });
 
 export const metadata: Metadata = {

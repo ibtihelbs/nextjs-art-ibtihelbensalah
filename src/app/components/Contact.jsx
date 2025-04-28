@@ -24,7 +24,7 @@ export const Contact = () => {
   };
 
   return (
-    <section className="w-full grid gap-8">
+    <section id="contact" className="w-full grid gap-8">
       <div>
         <XlTitle content={"contact"} className={"md:6xl"} />
         <hr className="border-2" />
