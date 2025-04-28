@@ -9,6 +9,7 @@ const geistSans = Geist({
 });
 const title = Imbue({
   variable: "--font-title",
+  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {

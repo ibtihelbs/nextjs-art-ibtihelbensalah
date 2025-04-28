@@ -26,12 +26,12 @@ export const Contact = () => {
   return (
     <section
       id="contact"
-      className="w-full md:h-screen grid grid grid-cols-4 content-center gap-8"
+      className="w-full md:h-screen divider-x-3 divider-solid grid grid grid-cols-4 content-center gap-8"
     >
       <div>
         <XlTitle
           content={"contact"}
-          className={"lg:9xl transtaleX-1/2 rotate-90"}
+          className={"lg:text-9xl transtaleX-1/2 rotate-90"}
         />
       </div>
       <form
