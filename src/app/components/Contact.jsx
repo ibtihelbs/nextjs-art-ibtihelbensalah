@@ -26,7 +26,7 @@ export const Contact = () => {
   return (
     <section
       id="contact"
-      className="w-full md:h-screen divide-x-3 divide-solid divide-black grid grid-cols-6 md:grid-cols-4 content-center gap-8"
+      className="w-full md:h-screen divide-x-3 divide-solid divide-black grid grid-cols-6 md:grid-cols-4 content-center md:gap-8"
     >
       <div>
         <XlTitle
