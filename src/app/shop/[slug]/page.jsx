@@ -25,7 +25,7 @@ export default async function PostPage({ params }) {
           ← Back to all artwork
         </Link>
 
-        <article className=" max-w-none grid md:grid-cols-2 md:gap-10">
+        <article className=" max-w-none grid md:grid-cols-2 md:gap-10 gap-0">
           <div className="space-y-2">
             <XlTitle content={post.title} className="text-start lg:text-5xl" />
 
