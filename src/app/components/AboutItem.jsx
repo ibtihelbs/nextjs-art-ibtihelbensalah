@@ -25,7 +25,7 @@ const AboutItem = ({ item, index }) => {
         scale,
         rotate,
       }}
-      className="sticky top-1/12 p-3 gap-5 bg-white h-[80vh]  overflow-hidden border-solid   grid grid-cols-6"
+      className="sticky top-1/12 p-3 gap-5 bg-white md:h-[80vh]  overflow-hidden border-solid   grid grid-cols-6"
     >
       <XlTitle
         className={" text-start lg:text-[140px] w-full"}
