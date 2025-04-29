@@ -26,7 +26,7 @@ export const Contact = () => {
   return (
     <section
       id="contact"
-      className="w-full md:h-screen divide-x-3 divide-solid divide-black grid grid grid-cols-4 content-center gap-8"
+      className="w-full md:h-screen divide-x-3 divide-solid divide-black grid grid-cols-6 md:grid-cols-4 content-center gap-8"
     >
       <div>
         <XlTitle
@@ -36,7 +36,7 @@ export const Contact = () => {
       </div>
       <form
         ref={form}
-        className="col-span-3 grid md:grid-cols-2  gap-8"
+        className="col-span-3 grid grid-cols-5 md:grid-cols-2  gap-8"
         onSubmit={sendEmail}
       >
         <div className=" grid gap-3">
