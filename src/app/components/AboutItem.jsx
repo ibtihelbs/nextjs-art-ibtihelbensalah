@@ -31,7 +31,7 @@ const AboutItem = ({ item, index }) => {
         className={" text-start lg:text-[140px] w-full"}
         content={`0${index + 1}`}
       />
-      <div className="relative col-span-2">
+      <div className="relative none md:block md:col-span-2">
         <Image
           src={urlFor(item.image).width().height().url()}
           alt={item.title}
@@ -39,7 +39,7 @@ const AboutItem = ({ item, index }) => {
           className="object-cover w-full h-auto"
         />
       </div>
-      <div className=" grid content-start gap-4  col-span-3 ">
+      <div className=" grid content-start gap-4  col-span-5 ">
         <XlTitle
           content={item.title}
           className={"bg-black text-white text-start lg:text-[140px] w-full"}

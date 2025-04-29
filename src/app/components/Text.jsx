@@ -1,6 +1,4 @@
-const Text = ({ content }) => {
-  return <p> {content} </p>;
-};
+
 const XlTitle = ({ content, className }) => {
   return (
     <h1
@@ -19,4 +17,4 @@ const Title = ({ content, className }) => {
     </h1>
   );
 };
-export { Text, XlTitle, Title };
+export {  XlTitle, Title };
