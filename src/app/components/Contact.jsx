@@ -36,7 +36,7 @@ export const Contact = () => {
       </div>
       <form
         ref={form}
-        className="col-span-3 grid grid-cols-5 md:grid-cols-2  gap-8"
+        className="md:col-span-3 grid span-cols-5 md:grid-cols-2  gap-8"
         onSubmit={sendEmail}
       >
         <div className=" grid gap-3">

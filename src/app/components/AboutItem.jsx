@@ -31,7 +31,7 @@ const AboutItem = ({ item, index }) => {
         className={" text-start lg:text-[140px] w-full"}
         content={`0${index + 1}`}
       />
-      <div className="relative none md:block md:col-span-2">
+      <div className="relative hidden md:block md:col-span-2">
         <Image
           src={urlFor(item.image).width().height().url()}
           alt={item.title}
