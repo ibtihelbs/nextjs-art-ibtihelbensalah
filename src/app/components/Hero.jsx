@@ -60,7 +60,10 @@ const Hero = async () => {
           </div>
         </div>
         <div className="md:grid hidden  gap-2 justify-items-end">
-          <XlTitle content={blog.title} className={"text-start lg:text-6xl"} />
+          <XlTitle
+            content={blog.title}
+            className={"text-start lg:text-6xl hidden md:block"}
+          />
           <div className="hidden md:block max-w-none text-xs ">
             <PortableText
               value={blog.content.slice(0, 1)}
@@ -70,7 +73,7 @@ const Hero = async () => {
           <div className="flex gap-2"></div>
           <Link
             href={"./blog/" + blog.slug.current}
-            className=" border-solid border-2 rounded-full float-right px-4 py-1"
+            className=" border-solid border-2 rounded-full bg-white float-right px-4 py-1"
           >
             {" "}
             read more...{" "}
