@@ -3,17 +3,10 @@ import { client } from "@/sanity/client";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Download from "@/app/components/Download";
-
+import { XlTitle, Title } from "@/app/components/Text";
 const { projectId, dataset } = client.config();
 const builder = imageUrlBuilder({ projectId, dataset });
 const urlFor = (source) => (source ? builder.image(source) : null);
-
-const getFileUrl = (file) => {
-  if (!file?.asset?._ref) return null;
-  return `https://cdn.sanity.io/files/${projectId}/${dataset}/${file.asset._ref
-    .replace("file-", "")
-    .replace("-", ".")}`;
-};
 
 export default async function PostPage({ params }) {
   try {
@@ -25,16 +18,16 @@ export default async function PostPage({ params }) {
     if (!post) {
       notFound();
     }
-
+    console.log(post);
     return (
-      <main className="container mx-auto min-h-screen max-w-7xl p-8">
+      <main className="container mx-auto p-8">
         <Link href="/shop" className="hover:underline mb-8 block">
           ← Back to all artwork
         </Link>
 
-        <article className="prose md:max-h-screen lg:prose-xl max-w-none grid md:grid-cols-2 md:gap-10">
-          <div>
-            <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
+        <article className=" max-w-none grid md:grid-cols-2 md:gap-10">
+          <div className="space-y-2">
+            <XlTitle content={post.title} className="text-start lg:text-5xl" />
 
             {post.image && (
               <div className="h-[60%]">
@@ -48,18 +41,16 @@ export default async function PostPage({ params }) {
           </div>
 
           <div>
-            {post.description && (
-              <div className="mb-6">
-                <p className="text-lg">{post.description}</p>
-              </div>
-            )}
+            <div className="grid gap-1">
+              {post.description.split(".").map((p, index) => (
+                <p key={index}>{p}.</p>
+              ))}
+            </div>
 
             <div className="grid grid-cols-2 gap-4 mb-6">
               {post.category && (
                 <div>
-                  <h3 className="text-sm font-medium text-gray-500">
-                    Category
-                  </h3>
+                  <Title content="Category :" className={"text-start"} />
                   <Link
                     href={`/shop?category=${encodeURIComponent(post.category)}`}
                     className="text-blue-600 hover:underline"
@@ -71,7 +62,8 @@ export default async function PostPage({ params }) {
 
               {post.medium && (
                 <div>
-                  <h3 className="text-sm font-medium text-gray-500">Medium</h3>
+                  <Title content="Medium :" className={"text-start"} />
+
                   <Link
                     href={`/shop?medium=${encodeURIComponent(post.medium)}`}
                     className="text-blue-600 hover:underline"
@@ -83,9 +75,8 @@ export default async function PostPage({ params }) {
 
               {post.editions?.length > 0 && (
                 <div>
-                  <h3 className="text-sm font-medium text-gray-500">
-                    Editions
-                  </h3>
+                  <Title content="Editions :" className={"text-start"} />
+
                   <div className="flex flex-wrap gap-2">
                     {post.editions.map((edition) => (
                       <Link
@@ -100,17 +91,11 @@ export default async function PostPage({ params }) {
                 </div>
               )}
 
-              {post.price && (
-                <div>
-                  <h3 className="text-sm font-medium text-gray-500">Price</h3>
-                  <p>
-                    $
-                    {post.price.toFixed(2) === "0.00"
-                      ? "free"
-                      : post.price.toFixed(2)}
-                  </p>
-                </div>
-              )}
+              <div>
+                <Title content="Price :" className={"text-start"} />
+
+                <p>{!post.price ? "free" : post.price.toFixed(2) + " dt"}</p>
+              </div>
             </div>
 
             {post.tags?.length > 0 && (

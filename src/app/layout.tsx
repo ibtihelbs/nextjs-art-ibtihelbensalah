@@ -1,15 +1,16 @@
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
-import { Imbue } from "next/font/google";
+import { Imbue, Poppins } from "next/font/google";
 import "./globals.css";
 import Nav from "./components/Nav";
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const geistSans = Poppins({
   subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-text",
 });
 const title = Imbue({
   variable: "--font-title",
   subsets: ["latin"],
+  weight: ["900"],
 });
 
 export const metadata: Metadata = {

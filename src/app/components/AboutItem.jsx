@@ -47,10 +47,7 @@ const AboutItem = ({ item, index }) => {
 
         <div className="vr grid gap-3">
           {item.content.split(".").map((p, i) => (
-            <p className="text-xl" key={i}>
-              {" "}
-              {p}{" "}
-            </p>
+            <p key={i}> {p} </p>
           ))}
         </div>
       </div>

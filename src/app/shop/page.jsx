@@ -20,7 +20,7 @@ export default async function IndexPage({ searchParams }) {
       category,
       medium,
       image,
-      updatedAt
+      updatedAt, price
     }`;
 
     if (!key || !value) {
@@ -34,55 +34,50 @@ export default async function IndexPage({ searchParams }) {
       _type == "artwork"
       && defined(slug.current)
       && ${key} match "*${value}*"
-    ]|order(updatedAt desc)[0...12]{
-      _id,
-      title,
-      slug,
-      category,
-      medium,
-      image,
-      updatedAt
-    }`;
+    ]|order(updatedAt desc)[0...12]`;
   };
 
   const artworks = await client.fetch(ARTWORKS_QUERY(), {}, options);
+
   return (
-    <main className="container mx-auto min-h-screen  md:py-8">
+    <main className="container mx-auto min-h-screen  ">
       {value ? <Link href={"/shop"}>back to shop</Link> : ""}{" "}
-      <XlTitle content={value || "shop"} />
-      <ul className="grid  md:grid-cols-2 md:gap-4 lg:grid-cols-3 gap-y-6">
+      <XlTitle content={value || "shop"} className={"lg:text-6xl py-4"} />
+      <ul className="grid  md:grid-cols-2 md:gap-4  lg:grid-cols-3 gap-y-6">
         {artworks.map((artwork) => (
-          <li key={artwork._id} className="grid gap-2">
+          <li key={artwork._id} className="grid gap-2 border">
             {artwork.image && (
               <img
                 src={urlFor(artwork.image).width().height().url()}
                 alt={artwork.title}
-                className="w-full h-[300px] object-cover rounded-lg"
+                className="w-full h-[300px] object-cover "
               />
             )}
-            <div className="grid gap-1 ">
-              <h2 className="text-xl self-start font-semibold whitespace-nowrap overflow-hidden text-ellipsis ">
-                {artwork.title}
-              </h2>
-              <div className="flex justify-between items-start">
-                <p className="text-sm flex gap-2  text-gray-500">
-                  <Link href={`/shop?category=${artwork.category}`}>
-                    {artwork.category}
-                  </Link>
-                  <Link href={`/shop?medium=${artwork.medium}`}>
-                    {artwork.medium}
-                  </Link>
-                </p>
+            <div className="text-sm flex items-center gap-2 p-2 justify-between text-gray-500">
+              <Link href={`/shop?category=${artwork.category}`}>
+                {artwork.category}
+              </Link>
+              <hr className="w-full border-2 border-black rounded-full" />
+              <Link href={`/shop?medium=${artwork.medium}`}>
+                {artwork.medium}
+              </Link>
+            </div>
+            <div className="grid gap-1 p-2">
+              <XlTitle content={artwork.title} />
+              <div className="flex justify-between items-start ">
+                <h2 className="font-black text-xl">
+                  {!artwork.price ? "Free" : artwork.price.toFixed(2) + "dt"}
+                </h2>
+
                 <Link
                   href={`/shop/${artwork.slug.current}`}
-                  className="px-2 py-1 rounded-full border"
+                  className="px-2 py-1 capitalize text-sm font-black rounded-full border"
                 >
                   {" "}
-                  more{" "}
+                  details{" "}
                 </Link>
               </div>
             </div>
-            
           </li>
         ))}
       </ul>

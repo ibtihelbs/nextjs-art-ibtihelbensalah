@@ -54,7 +54,7 @@ const Nav = () => {
           })}
         </p>
 
-        <hr className="w-full border-4" />
+        <hr className="w-full border-2 rounded-full" />
         <div className="flex gap-1">
           {socialLinks.map((link, i) => (
             <a
@@ -70,8 +70,7 @@ const Nav = () => {
         </div>
       </div>
       <div className="middle-nav grid place-content-center">
-        <XlTitle content={"IBTIHEL"} className={"md:text-9xl"} />
-        <XlTitle content={"BEN SALAH"} className={"md:text-4xl"} />
+        <XlTitle content={"IBTIHEL BEN SALAH"} className={"lg:text-9xl"} />
       </div>
       <hr />
 

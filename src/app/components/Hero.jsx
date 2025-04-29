@@ -60,11 +60,11 @@ const Hero = async () => {
           </div>
         </div>
         <div className="md:grid hidden  gap-2 justify-items-end">
-          <XlTitle content={blog.title} className={"text-start "} />
-          <div className="hidden md:block max-w-none  ">
+          <XlTitle content={blog.title} className={"text-start lg:text-6xl"} />
+          <div className="hidden md:block max-w-none text-xs ">
             <PortableText
               value={blog.content.slice(0, 1)}
-              className="text-ellipsis "
+              className="text-ellipsis"
             />
           </div>
           <div className="flex gap-2"></div>
@@ -81,7 +81,7 @@ const Hero = async () => {
         <div className="relative w-full bg-red-500 h-[300px] ">
           <Image src={"/wallpaper.jpg"} alt="wallpaper" fill />
         </div>
-        <XlTitle content={"wallpaper collection"} />
+        <XlTitle className={"lg:text-6xl"} content={"wallpaper collection"} />
         <Link
           href={"/shop"}
           className="border-solid border-2 rounded-full float-right px-4 py-1"

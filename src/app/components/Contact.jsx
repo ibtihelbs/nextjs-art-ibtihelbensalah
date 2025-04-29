@@ -26,7 +26,7 @@ export const Contact = () => {
   return (
     <section
       id="contact"
-      className="w-full md:h-screen divider-x-3 divider-solid grid grid grid-cols-4 content-center gap-8"
+      className="w-full md:h-screen divide-x-3 divide-solid divide-black grid grid grid-cols-4 content-center gap-8"
     >
       <div>
         <XlTitle
@@ -41,7 +41,7 @@ export const Contact = () => {
       >
         <div className=" grid gap-3">
           <div className="grid gap-2">
-            <label>Name</label>
+            <label className="font-bold text-xl tracking-tight">Name</label>
             <input
               className="px-4 py-1 border-gray-500 rounded-full border-solid border"
               placeholder="Name...."
@@ -50,7 +50,7 @@ export const Contact = () => {
             />
           </div>
           <div className="grid gap-2">
-            <label>Email</label>
+            <label className="font-bold text-xl tracking-tight">Email</label>
             <input
               className="px-4 py-1 border-gray-500 rounded-full border-solid border"
               placeholder="Email...."
@@ -61,7 +61,7 @@ export const Contact = () => {
         </div>
         <div className="md:vr grid gap-3">
           <div className="grid gap-2">
-            <label>Message</label>
+            <label className="font-bold text-xl tracking-tight">Message</label>
             <textarea
               className="px-4 py-1 border-gray-500 rounded-xl border-solid border"
               placeholder="Message...."

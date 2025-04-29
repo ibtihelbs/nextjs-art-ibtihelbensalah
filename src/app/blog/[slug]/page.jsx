@@ -19,8 +19,7 @@ const page = async ({ params }) => {
   const { slug } = params;
   const blog = await client.fetch(query, { slug });
   return (
-    <article className="max-w-3xl mx-auto px-4 py-10 space-y-6">
-      <XlTitle content={blog.title} />
+    <article className="max-w-3xl mx-auto px-4 py-10 space-y-4">
       <div className="flex justify-between">
         <p className="text-sm text-gray-500">
           {new Date(blog.publishedAt).toLocaleDateString()}
@@ -43,6 +42,7 @@ const page = async ({ params }) => {
           className="rounded-lg"
         />
       )}
+      <XlTitle content={blog.title} className="lg:text-7xl" />
 
       <div className="prose max-w-none">
         <PortableText value={blog.content} />
