@@ -39,7 +39,7 @@ const AboutItem = ({ item, index }) => {
           className="object-cover w-full h-auto"
         />
       </div>
-      <div className=" grid content-start gap-4  col-span-5 ">
+      <div className=" grid content-start gap-4  md:col-span-5 ">
         <XlTitle
           content={item.title}
           className={"bg-black text-white text-start lg:text-[140px] w-full"}

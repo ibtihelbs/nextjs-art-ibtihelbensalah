@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Download from "@/app/components/Download";
 import { XlTitle, Title } from "@/app/components/Text";
+import Image from "next/image";
 const { projectId, dataset } = client.config();
 const builder = imageUrlBuilder({ projectId, dataset });
 const urlFor = (source) => (source ? builder.image(source) : null);
@@ -21,20 +22,21 @@ export default async function PostPage({ params }) {
     console.log(post);
     return (
       <main className="container mx-auto p-8">
-        <Link href="/shop" className="hover:underline mb-8 block">
+        <Link href="/shop" className="hover:underline  block">
           ← Back to all artwork
         </Link>
 
-        <article className=" max-w-none grid md:grid-cols-2 md:gap-10 gap-0">
+        <article className=" max-w-none grid md:grid-cols-2 md:gap-10 gap-2 items-start">
           <div className="space-y-2">
             <XlTitle content={post.title} className="text-start lg:text-5xl" />
 
             {post.image && (
-              <div className="h-[60%]">
-                <img
+              <div className="relative h-[50vh]">
+                <Image
                   src={urlFor(post.image).width().url()}
                   alt={post.title}
-                  className="object-cover w-full max-h-full rounded-lg"
+                  fill
+                  className="object-cover w-full  rounded-lg"
                 />
               </div>
             )}

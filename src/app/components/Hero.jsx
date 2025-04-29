@@ -33,7 +33,7 @@ const Hero = async () => {
             <div className="flex gap-2"></div>
             <Link
               href={"./blog/" + blog.slug.current}
-              className=" border-solid border-2 rounded-full float-right px-4 py-1"
+              className=" border-solid border-2 rounded-full float-right px-4 py-1 bg-white"
             >
               {" "}
               read more...{" "}

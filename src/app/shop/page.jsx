@@ -43,14 +43,14 @@ export default async function IndexPage({ searchParams }) {
     <main className="container mx-auto min-h-screen  ">
       {value ? <Link href={"/shop"}>back to shop</Link> : ""}{" "}
       <XlTitle content={value || "shop"} className={"lg:text-6xl py-4"} />
-      <ul className="grid  md:grid-cols-2 md:gap-4  lg:grid-cols-3 gap-y-6">
+      <ul className="grid  md:grid-cols-2 md:gap-4  lg:grid-cols-3 md:gap-y-4 gap-y-2">
         {artworks.map((artwork) => (
           <li key={artwork._id} className="grid gap-2 border">
             {artwork.image && (
               <img
                 src={urlFor(artwork.image).width().height().url()}
                 alt={artwork.title}
-                className="w-full h-[300px] object-cover "
+                className="w-full  object-cover "
               />
             )}
             <div className="text-sm flex items-center gap-2 p-2 justify-between text-gray-500">
