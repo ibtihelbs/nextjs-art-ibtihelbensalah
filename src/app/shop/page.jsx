@@ -43,17 +43,17 @@ export default async function IndexPage({ searchParams }) {
     <main className="container mx-auto min-h-screen  ">
       {value ? <Link href={"/shop"}>back to shop</Link> : ""}{" "}
       <XlTitle content={value || "shop"} className={"lg:text-6xl py-4"} />
-      <ul className="grid  md:grid-cols-2 md:gap-4  lg:grid-cols-3 md:gap-y-4 gap-y-2">
+      <ul className="grid  md:grid-cols-2 md:gap-3 lg:grid-cols-3 md:gap-y-4 gap-2">
         {artworks.map((artwork) => (
-          <li key={artwork._id} className="grid gap-2 border">
+          <li key={artwork._id} className="grid gap-1 items-start border">
             {artwork.image && (
               <img
                 src={urlFor(artwork.image).width().height().url()}
                 alt={artwork.title}
-                className="w-full  object-cover "
+                className="w-full h-[300px] object-cover "
               />
             )}
-            <div className="text-sm flex items-center gap-2 p-2 justify-between text-gray-500">
+            <div className="text-sm flex items-center justify-between px-2 gap-2 text-gray-500">
               <Link href={`/shop?category=${artwork.category}`}>
                 {artwork.category}
               </Link>
