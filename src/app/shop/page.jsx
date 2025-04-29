@@ -62,7 +62,7 @@ export default async function IndexPage({ searchParams }) {
                 {artwork.medium}
               </Link>
             </div>
-            <div className="grid gap-1 p-2">
+            <div className="grid gap-1 px-2 pb-2 ">
               <XlTitle content={artwork.title} />
               <div className="flex justify-between items-start ">
                 <h2 className="font-black text-xl">
