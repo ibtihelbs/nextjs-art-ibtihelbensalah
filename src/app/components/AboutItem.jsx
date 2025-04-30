@@ -28,7 +28,7 @@ const AboutItem = ({ item, index }) => {
       className="sticky top-1/12 p-3 gap-5 bg-white md:h-[80vh]  overflow-hidden border-solid   grid grid-cols-6"
     >
       <XlTitle
-        className={" text-start lg:text-[140px] w-full"}
+        className={"text-start lg:text-[140px] w-full"}
         content={`0${index + 1}`}
       />
       <div className="relative hidden md:block md:col-span-2">
@@ -39,7 +39,7 @@ const AboutItem = ({ item, index }) => {
           className="object-cover w-full h-auto"
         />
       </div>
-      <div className=" grid content-start gap-4  md:col-span-5 ">
+      <div className=" grid content-start gap-4  md:col-span-2 col-span-5 ">
         <XlTitle
           content={item.title}
           className={"bg-black text-white text-start lg:text-[140px] w-full"}
