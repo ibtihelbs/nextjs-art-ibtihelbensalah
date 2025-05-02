@@ -41,8 +41,8 @@ const Nav = () => {
   return (
     <motion.header
       initial={{ y: 0 }}
-      animate={{ y: isVisible ? 0 : -100 }}
-      transition={{ type: "spring", damping: 20, stiffness: 300 }}
+      animate={{ y: isVisible ? "0%" : "-100%" }}
+      transition={{ type: "spring", damping: 20, duration: 1 }}
       className="sticky top-0 z-50 bg-white "
     >
       <div className="upper-nav flex gap-4 justify-between items-center bg-red">
