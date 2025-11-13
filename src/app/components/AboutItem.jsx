@@ -3,53 +3,91 @@ import { urlFor } from "@/sanity/imageUrl";
 import { XlTitle } from "./Text";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
+import { useRef } from "react";
 
 const AboutItem = ({ item, index }) => {
+  const containerRef = useRef(null);
+
   const { scrollYProgress } = useScroll({
-    target: null, // No need for a ref
-    offset: ["start end", "end start"], // Adjust offsets for smooth animations
-    layoutEffect: false, // Disable layout effect for better performance
+    target: containerRef,
+    offset: ["start end", "end start"],
+    layoutEffect: false,
   });
+
   // Define transformations
-  const scale = useTransform(scrollYProgress, [0, 1], [0.8, 1]);
+  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.8, 1, 0.95]);
   const rotate = useTransform(
     scrollYProgress,
-    [0, 0.25, 1],
-    index % 2 === 0 ? [10, 0, -5] : [-10, 0, 5]
+    [0, 0.5, 1],
+    index % 2 === 0 ? [5, 0, -3] : [-5, 0, 3]
   );
+
+  // Helper to render content blocks
+  const renderContent = () => {
+    // If content is an array of blocks (rich text from Sanity)
+    if (Array.isArray(item.content)) {
+      return item.content.map((block) => {
+        if (block._type === "block") {
+          return (
+            <p key={block._key} className="text-base leading-relaxed">
+              {block.children?.map((child) => child.text).join("")}
+            </p>
+          );
+        }
+        return null;
+      });
+    }
+
+    // If content is a simple string
+    if (typeof item.content === "string") {
+      return item.content
+        .split(".")
+        .filter(Boolean)
+        .map((sentence, i) => (
+          <p key={i} className="text-base leading-relaxed">
+            {sentence.trim()}.
+          </p>
+        ));
+    }
+
+    return <p>No content available</p>;
+  };
 
   return (
     <motion.div
-      key={item._id}
+      ref={containerRef}
       style={{
         scale,
         rotate,
       }}
-      className="sticky top-1/12 p-3 gap-5 bg-white md:h-[80vh]  overflow-hidden border-solid   grid  grid-cols-6"
+      className="sticky top-[10vh] p-3 gap-5 bg-white md:h-[80vh] overflow-hidden border border-gray-200 shadow-lg grid grid-cols-6"
     >
-      <XlTitle
-        className={"text-start lg:text-[140px] w-full"}
-        content={`0${index + 1}`}
-      />
-      <div className="relative hidden md:block md:col-span-2">
-        <Image
-          src={urlFor(item.image).width().height().url()}
-          alt={item.title}
-          fill
-          className="object-cover w-full h-auto"
+      <div className="col-span-1">
+        <XlTitle
+          className="text-start lg:text-[140px] w-full text-gray-200"
+          content={`0${index + 1}`}
         />
       </div>
-      <div className=" grid content-start gap-4  md:col-span-3 col-span-5 ">
+
+      {item.image?.asset?._ref && (
+        <div className="relative hidden md:block md:col-span-2 rounded-lg overflow-hidden">
+          <Image
+            src={urlFor(item.image).width(800).height(600).url()}
+            alt={item.title || "About image"}
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 40vw"
+          />
+        </div>
+      )}
+
+      <div className="grid content-start gap-4 md:col-span-3 col-span-5">
         <XlTitle
           content={item.title}
-          className={"bg-black text-white text-start lg:text-[140px] w-full"}
+          className="bg-black text-white text-start lg:text-6xl xl:text-7xl w-full px-4 py-2 rounded-lg"
         />
 
-        <div className="vr grid gap-3">
-          {item.content.split(".").map((p, i) => (
-            <p key={i}> {p} </p>
-          ))}
-        </div>
+        <div className="grid gap-3 text-gray-700">{renderContent()}</div>
       </div>
     </motion.div>
   );
