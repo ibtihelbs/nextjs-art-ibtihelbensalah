@@ -12,7 +12,8 @@ const query = `*[_type == "blog" && slug.current == $slug][0] {
   extraImages,
   tags,
   categories,
-  content
+  content, 
+  additionalImages
 }`;
 
 const page = async ({ params }) => {

@@ -15,7 +15,7 @@
     "@types/mailchimp__mailchimp_marketing": "^3.0.21",
     "clsx": "^2.1.1",
     "motion": "^12.7.3",
-    "next": "15.2.2",
+    "next": "15.2.6",
     "next-sanity": "^9.9.5",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
