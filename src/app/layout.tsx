@@ -26,7 +26,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <meta name="p:domain_verify" content="ba65f15f0a3050ea516361199982c57a" />
       <body
         className={`${geistSans.variable} ${title.variable}  antialiased p-2  md:px-16`}
       >
