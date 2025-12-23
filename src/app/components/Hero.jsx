@@ -6,7 +6,7 @@ import { XlTitle } from "./Text";
 import InfiniteScroll from "./animation/InfiniteScroll";
 import Link from "next/link";
 const Hero = async () => {
-  const query = `*[_type == "blog" && slug.current == "colors-of-tunisia-exhibiting-watercolors-in-the-historic-medina"][0] {
+  const query = `*[_type == "blog" && slug.current == "mon-calendrier-tunisien-2026-12-peintures-gouache-12-mois-de-voyage"][0] {
     _id,
     title,
     slug,
