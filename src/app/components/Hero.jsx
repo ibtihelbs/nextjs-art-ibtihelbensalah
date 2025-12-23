@@ -24,7 +24,7 @@ const Hero = async () => {
       {blog ? (
         <>
           <div className="lg:col-span-3 grid md:grid-cols-3 gap-3">
-            <div className="w-full h-[80vh] md:w-full md:h-full bg-red-300 col-span-2 relative">
+            <div className="w-full h-[80vh] md:w-full md:h-full col-span-2 relative">
               <Image
                 src={urlFor(blog.image).width().url()}
                 alt="blog"
