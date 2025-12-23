@@ -44,9 +44,7 @@ const Hero = async () => {
               <div className=" flex absolute bottom-0 w-full bg-yellow-400 whitespace-nowrap">
                 <InfiniteScroll>
                   <XlTitle
-                    content={
-                      "Élan Créatif * 12 April - 5 mai * Tunis * st-croix * medina"
-                    }
+                    content={blog.title}
                     className={
                       " text-6xl  overflow-hidden text-start whitespace-nowrap "
                     }
