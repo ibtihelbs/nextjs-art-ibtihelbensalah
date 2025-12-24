@@ -17,6 +17,9 @@ export const metadata: Metadata = {
   title: "ibtihel ben salah art portfolio",
   description:
     "Ibtihel Ben Salah — Visual artist capturing vibrant scenes through watercolor, acrylic, and gouache. Explore unique pieces celebrating Tunisian culture, food, architecture, and more",
+  alternates: {
+    canonical: "https://nextjs-art-ibtihelbensalah.vercel.app",
+  },
 };
 
 export default function RootLayout({
