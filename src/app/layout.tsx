@@ -16,7 +16,7 @@ const title = Imbue({
 export const metadata: Metadata = {
   title: "ibtihel ben salah art portfolio",
   description:
-    "Ibtihel Ben Salah — Visual artist capturing vibrant scenes through watercolor, acrylic, and gouache. Explore unique pieces celebrating Tunisian culture, food, architecture, and more",
+    "Artiste peintre tunisienne. Découvrez mes aquarelles, acryliques et gouaches célébrant la culture, la gastronomie et l'architecture de Tunisie.",
   alternates: {
     canonical: "https://nextjs-art-ibtihelbensalah.vercel.app",
   },

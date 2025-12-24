@@ -1,6 +1,6 @@
 "use client";
 import { urlFor } from "@/sanity/imageUrl";
-import { XlTitle } from "./Text";
+import { Title } from "./Text";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import { useRef } from "react";
@@ -63,7 +63,7 @@ const AboutItem = ({ item, index }) => {
       className="sticky top-[10vh] p-3 gap-5 bg-white md:h-[80vh] overflow-hidden border border-gray-200 shadow-lg grid grid-cols-6"
     >
       <div className="col-span-1">
-        <XlTitle
+        <Title
           className="text-start lg:text-[140px] w-full text-gray-200"
           content={`0${index + 1}`}
         />
@@ -82,7 +82,7 @@ const AboutItem = ({ item, index }) => {
       )}
 
       <div className="grid content-start gap-4 md:col-span-3 col-span-5">
-        <XlTitle
+        <Title
           content={item.title}
           className="bg-black text-white text-start lg:text-6xl xl:text-7xl w-full px-4 py-2 rounded-lg"
         />

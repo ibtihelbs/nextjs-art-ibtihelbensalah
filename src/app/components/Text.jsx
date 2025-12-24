@@ -1,4 +1,3 @@
-
 const XlTitle = ({ content, className }) => {
   return (
     <h1
@@ -10,11 +9,11 @@ const XlTitle = ({ content, className }) => {
 };
 const Title = ({ content, className }) => {
   return (
-    <h1
-      className={`font-[family-name:var(--font-title)] font-black uppercase md:text-2xl text-xl underline tracking-tight text-center ${className}`}
+    <h2
+      className={`font-[family-name:var(--font-title)] font-black uppercase md:text-2xl text-xl  tracking-tight text-center ${className}`}
     >
       {content}
-    </h1>
+    </h2>
   );
 };
-export {  XlTitle, Title };
+export { XlTitle, Title };

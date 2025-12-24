@@ -83,7 +83,7 @@ const Nav = () => {
             <Link href={"/blog"}>Blog</Link>
           </li>
         </ul>
-
+        <Link href={"/portfolio"}>Portfolio</Link>
         <ul className="flex gap-2">
           <li>
             <Link href={"/shop"}>shop</Link>

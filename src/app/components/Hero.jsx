@@ -2,7 +2,7 @@ import Image from "next/image";
 import { client } from "@/sanity/client";
 import { PortableText } from "@portabletext/react";
 import { urlFor } from "@/sanity/imageUrl";
-import { XlTitle } from "./Text";
+import { Title } from "./Text";
 import InfiniteScroll from "./animation/InfiniteScroll";
 import Link from "next/link";
 const Hero = async () => {
@@ -43,7 +43,7 @@ const Hero = async () => {
               </div>
               <div className=" flex absolute bottom-0 w-full bg-yellow-400 whitespace-nowrap">
                 <InfiniteScroll>
-                  <XlTitle
+                  <Title
                     content={blog.title}
                     className={
                       " text-6xl  overflow-hidden text-start whitespace-nowrap "
@@ -52,8 +52,8 @@ const Hero = async () => {
                 </InfiniteScroll>
               </div>
             </div>
-            <div className="md:grid hidden  gap-2 justify-items-end">
-              <XlTitle
+            <div className="md:flex flex-col hidden  gap-2 justify-items-end">
+              <Title
                 content={blog.title}
                 className={"text-start lg:text-6xl"}
               />
@@ -63,10 +63,9 @@ const Hero = async () => {
                   className="text-ellipsis"
                 />
               </div>
-              <div className="flex gap-2"></div>
               <Link
                 href={"./blog/" + blog.slug.current}
-                className=" border-solid border-2 rounded-full float-right px-4 py-1"
+                className=" border-solid border-2 rounded-full float-right px-4 py-1 self-end"
               >
                 {" "}
                 read more...{" "}
@@ -77,10 +76,7 @@ const Hero = async () => {
             <div className="relative w-full bg-red-500 h-[300px] ">
               <Image src={"/wallpaper.jpg"} alt="wallpaper" fill />
             </div>
-            <XlTitle
-              className={"lg:text-6xl"}
-              content={"wallpaper collection"}
-            />
+            <Title className={"lg:text-6xl"} content={"wallpaper collection"} />
             <Link
               href={"/shop"}
               className="border-solid border-2 rounded-full float-right px-4 py-1"
