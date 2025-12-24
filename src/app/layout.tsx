@@ -14,7 +14,7 @@ const title = Imbue({
 });
 
 export const metadata: Metadata = {
-  title: "ibtihel ben salah art portfolio",
+  title: "Ibtihel Ben Salah | Artiste Peintre Tunisienne Portfolio",
   description:
     "Artiste peintre tunisienne. Découvrez mes aquarelles, acryliques et gouaches célébrant la culture, la gastronomie et l'architecture de Tunisie.",
   alternates: {

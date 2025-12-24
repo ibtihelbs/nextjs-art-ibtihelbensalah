@@ -1,7 +1,7 @@
 "use client";
 import React, { useRef, useState, FormEvent } from "react";
 import emailjs from "@emailjs/browser";
-import { XlTitle } from "./Text";
+import { Title } from "./Text";
 
 export const Contact = () => {
   const form = useRef(null);
@@ -41,7 +41,7 @@ export const Contact = () => {
       className="w-full md:h-screen divide-x-3 divide-solid divide-black grid grid-cols-6 md:grid-cols-4 content-center md:gap-8 gap-2"
     >
       <div>
-        <XlTitle
+        <Title
           content={"contact"}
           className={"lg:text-9xl transtaleX-1/2 rotate-90"}
         />
