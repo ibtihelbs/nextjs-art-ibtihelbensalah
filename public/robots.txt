@@ -1,8 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /api/
-Disallow: /private/
-Disallow: /admin/
 
 Sitemap: https://nextjs-art-ibtihelbensalah.vercel.app/sitemap.xml
-Host: https://nextjs-art-ibtihelbensalah.vercel.app
