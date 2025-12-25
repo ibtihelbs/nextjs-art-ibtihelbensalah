@@ -3,6 +3,7 @@ import { PortableText } from "@portabletext/react";
 import Image from "next/image";
 import { urlFor } from "../../../sanity/imageUrl";
 import { XlTitle } from "../../components/Text";
+import { portableTextComponents } from "../../lib/portableTextConf";
 const query = `*[_type == "blog" && slug.current == $slug][0] {
   _id,
   title,
@@ -46,7 +47,10 @@ const page = async ({ params }) => {
       <XlTitle content={blog.title} className="lg:text-7xl" />
 
       <div className="prose max-w-none">
-        <PortableText value={blog.content} />
+        <PortableText
+          value={blog.content}
+          components={portableTextComponents}
+        />
       </div>
 
       <div className="flex gap-2 mt-4 flex-wrap">
