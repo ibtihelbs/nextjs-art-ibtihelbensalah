@@ -4,7 +4,6 @@ import Image from "next/image";
 import { urlFor } from "../../../sanity/imageUrl";
 import { XlTitle } from "../../components/Text";
 import { portableTextComponents } from "../../lib/portableTextConf";
-import { image } from "motion/react-client";
 const query = `*[_type == "blog" && slug.current == $slug][0] {
   _id,
   title,
