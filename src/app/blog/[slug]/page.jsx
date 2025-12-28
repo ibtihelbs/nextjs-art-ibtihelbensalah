@@ -4,6 +4,7 @@ import Image from "next/image";
 import { urlFor } from "../../../sanity/imageUrl";
 import { XlTitle } from "../../components/Text";
 import { portableTextComponents } from "../../lib/portableTextConf";
+import { image } from "motion/react-client";
 const query = `*[_type == "blog" && slug.current == $slug][0] {
   _id,
   title,
@@ -61,6 +62,17 @@ const page = async ({ params }) => {
           >
             #{tag}
           </span>
+        ))}
+      </div>
+      <div className="flex gap-2 mt-4 flex-wrap">
+        {blog.additionalImages?.map((img) => (
+          <Image
+            src={urlFor(img.image).width().url()}
+            alt={blog.title}
+            width={800}
+            height={450}
+            className="rounded-lg"
+          />
         ))}
       </div>
     </article>
