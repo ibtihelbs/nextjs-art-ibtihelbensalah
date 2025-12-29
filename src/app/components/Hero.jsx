@@ -3,7 +3,6 @@ import { client } from "@/sanity/client";
 import { PortableText } from "@portabletext/react";
 import { urlFor } from "@/sanity/imageUrl";
 import { Title } from "./Text";
-import InfiniteScroll from "./animation/InfiniteScroll";
 import Link from "next/link";
 const Hero = async () => {
   const query = `*[_type == "blog" && slug.current == "mon-calendrier-tunisien-2026-12-peintures-gouache-12-mois-de-voyage"][0] {
@@ -31,8 +30,7 @@ const Hero = async () => {
                 fill
                 className="fit-cover"
               />
-              <div className="block md:hidden absolute ">
-                <div className="flex gap-2"></div>
+              <div className="block md:hidden absolute bottom-0.5 right-0.5">
                 <Link
                   href={"./blog/" + blog.slug.current}
                   className=" border-solid border-2 rounded-full float-right px-4 py-1 bg-white"
@@ -41,16 +39,7 @@ const Hero = async () => {
                   read more...{" "}
                 </Link>
               </div>
-              <div className=" flex absolute bottom-0 w-full bg-yellow-400 whitespace-nowrap">
-                <InfiniteScroll>
-                  <Title
-                    content={blog.title}
-                    className={
-                      " text-6xl  overflow-hidden text-start whitespace-nowrap "
-                    }
-                  />
-                </InfiniteScroll>
-              </div>
+              <div className=" flex absolute bottom-0 w-full bg-yellow-400 whitespace-nowrap"></div>
             </div>
             <div className="md:flex flex-col hidden  gap-2 justify-items-end">
               <Title
