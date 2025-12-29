@@ -18,7 +18,7 @@ const Hero = async () => {
     content
   }`;
   const blog = await client.fetch(query);
-  console.log(blog);
+
   return (
     <section className="grid lg:grid-cols-4 w-full min-h-[70vh] gap-6 ">
       {blog ? (
