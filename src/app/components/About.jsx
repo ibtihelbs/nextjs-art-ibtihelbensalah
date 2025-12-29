@@ -10,7 +10,7 @@ const About = async () => {
     slug,
     content,
     image,
-  }|order(_createdAt asc)`;
+  }|order(_createdAt desc)`;
 
   const about = await client.fetch(ABOUT_QUERY);
 
