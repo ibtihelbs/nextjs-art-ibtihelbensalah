@@ -70,7 +70,7 @@ const AboutItem = ({ item, index }) => {
       </div>
 
       {item.image?.asset?._ref && (
-        <div className="relative hidden md:block md:col-span-2 rounded-lg overflow-hidden">
+        <div className="relative hidden md:block md:col-span-3 rounded-lg overflow-hidden">
           <Image
             src={urlFor(item.image).width(800).height(600).url()}
             alt={item.title || "About image"}
@@ -81,7 +81,7 @@ const AboutItem = ({ item, index }) => {
         </div>
       )}
 
-      <div className="grid content-start gap-4 md:col-span-3 col-span-5">
+      <div className="grid content-start gap-4 md:col-span-2 col-span-5">
         <Title
           content={item.title}
           className="bg-black text-white text-start lg:text-6xl xl:text-7xl w-full px-4 py-2 rounded-lg"
