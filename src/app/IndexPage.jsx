@@ -4,7 +4,7 @@ function IndexPage() {
   return (
     <div>
       <Head>
-        <title>Canonical Tag Example</title>
+        <title>Canonical ibtihelbensalah</title>
         <link
           rel="canonical"
           href="https://ibtihelbensalah-art.vercel.app"
