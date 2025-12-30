@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Imbue, Poppins } from "next/font/google";
+import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
+
 import "./globals.css";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
@@ -36,6 +38,8 @@ export default function RootLayout({
         <Nav />
         {children}
         <Footer />
+        <GoogleAnalytics gaId="G-784201359" />
+        <GoogleTagManager gtmId="GTM-N58ZPTP8" />
       </body>
     </html>
   );
