@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Imbue, Poppins } from "next/font/google";
 import "./globals.css";
 import Nav from "./components/Nav";
+import Footer from "./components/Footer";
 const geistSans = Poppins({
   subsets: ["latin"],
   weight: ["400", "700"],
@@ -34,6 +35,7 @@ export default function RootLayout({
       >
         <Nav />
         {children}
+        <Footer />
       </body>
     </html>
   );

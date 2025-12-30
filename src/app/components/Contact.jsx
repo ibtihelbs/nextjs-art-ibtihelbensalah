@@ -13,11 +13,26 @@ export const Contact = () => {
 
     if (!form.current) return;
 
+    // Create template parameters object matching your EmailJS template
+    const templateParams = {
+      title: "art website email", // Fixed title
+      name: form.current.user_name.value, // From your manual test: "name"
+      email: form.current.user_email.value, // From your manual test: "email"
+      message: form.current.message.value, // From your manual test: "message"
+      time: new Date().toLocaleString(), // Current time
+      // You can also add these as fallbacks if needed
+      user_name: form.current.user_name.value,
+      user_email: form.current.user_email.value,
+    };
+
+    console.log("Sending with params:", templateParams);
+
+    // Use the .send() method with your exact service and template IDs
     emailjs
-      .sendForm(
+      .send(
         process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
         process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
-        form.current,
+        templateParams,
         {
           publicKey: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC,
         }
@@ -34,16 +49,15 @@ export const Contact = () => {
         });
       });
   };
-
   return (
     <section
       id="contact"
-      className="w-full md:h-screen divide-x-3 divide-solid divide-black grid grid-cols-6 md:grid-cols-4 content-center md:gap-8 gap-2"
+      className="w-full md:h-[60vh] divide-x-3 divide-solid divide-black grid grid-cols-6 md:grid-cols-4 content-center md:gap-8 gap-2"
     >
       <div>
         <Title
           content={"contact"}
-          className={"lg:text-9xl transtaleX-1/2 rotate-90"}
+          className={"lg:text-9xl translateX-1/2 rotate-90"}
         />
       </div>
       <form
@@ -114,7 +128,14 @@ export const Contact = () => {
                 statusMessage.success ? "text-green-600" : "text-red-600"
               }`}
             >
-              {statusMessage.message}
+              {statusMessage.message}{" "}
+              {statusMessage.success ? (
+                "will receive a reply"
+              ) : (
+                <a href="mailto:ibtihel.bensalah@outlook.fr" className="m-auto">
+                  click to send email{" "}
+                </a>
+              )}
             </p>
           )}
         </div>
