@@ -16,7 +16,7 @@ const About = async () => {
 
   return (
     <section className="grid gap-8 w-full py-6">
-      {about.map((item, index) => (
+      {about.reverse().map((item, index) => (
         <AboutItem item={item} key={item._id} index={index} />
       ))}
     </section>

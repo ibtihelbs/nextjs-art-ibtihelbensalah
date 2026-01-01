@@ -28,7 +28,11 @@ const Hero = async () => {
                 src={urlFor(blog.image).width().url()}
                 alt="blog"
                 fill
-                className="fit-cover"
+                className="object-cover"
+              />
+              <Title
+                content={blog.title}
+                className={"text-start lg:text-6xl absolute top-1/3"}
               />
               <div className="block md:hidden absolute bottom-0.5 right-0.5">
                 <Link

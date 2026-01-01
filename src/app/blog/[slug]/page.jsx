@@ -1,3 +1,4 @@
+"use client";
 import { client } from "@/sanity/client";
 import { PortableText } from "@portabletext/react";
 import Image from "next/image";
@@ -18,7 +19,7 @@ const query = `*[_type == "blog" && slug.current == $slug][0] {
 }`;
 
 const page = async ({ params }) => {
-  const { slug } = params;
+  const { slug } = await params; // Await the params promise
   const blog = await client.fetch(query, { slug });
   return (
     <article className="max-w-3xl mx-auto px-4 py-10 space-y-4">
