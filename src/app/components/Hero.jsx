@@ -32,7 +32,9 @@ const Hero = async () => {
               />
               <Title
                 content={blog.title}
-                className={"text-start lg:text-6xl absolute top-1/3"}
+                className={
+                  "text-start lg:text-6xl absolute top-1/3 block md:hidden"
+                }
               />
               <div className="block md:hidden absolute bottom-0.5 right-0.5">
                 <Link
