@@ -25,8 +25,6 @@ export const Contact = () => {
       user_email: form.current.user_email.value,
     };
 
-    console.log("Sending with params:", templateParams);
-
     // Use the .send() method with your exact service and template IDs
     emailjs
       .send(

@@ -12,7 +12,6 @@ export default function DownloadButton({ file, dataset, projectId }) {
       const fileRef = file.asset._ref;
       const [fileId, extension] = fileRef.replace("file-", "").split("-");
       const fileUrl = `https://cdn.sanity.io/files/${projectId}/${dataset}/${fileId}.${extension}`;
-      console.log("Downloading from:", fileUrl);
 
       // Fetch the file
       const response = await fetch(fileUrl);

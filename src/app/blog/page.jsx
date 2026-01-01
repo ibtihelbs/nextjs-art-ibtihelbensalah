@@ -19,7 +19,7 @@ const page = async () => {
   const artworks = await client.fetch(ARTWORKS_QUERY, {}, options);
 
   return (
-    <div className=" mx-auto px-4 py-8 space-y-16 grid grid-cols-3">
+    <div className=" mx-auto px-4 py-8 space-y-16 grid md:grid-cols-3">
       {artworks.map((post) => (
         <article key={post._id} className="space-y-2">
           <div className="flex justify-between">

@@ -19,7 +19,7 @@ export default async function PostPage({ params }) {
     if (!post) {
       notFound();
     }
-    console.log(post);
+
     return (
       <main className="container mx-auto p-8">
         <Link href="/shop" className="hover:underline  block">
@@ -83,7 +83,7 @@ export default async function PostPage({ params }) {
                     {post.editions.map((edition) => (
                       <Link
                         key={edition}
-                        href={`/shop?edition=${encodeURIComponent(edition)}`}
+                        href={`/shop?editions=${encodeURIComponent(edition)}`}
                         className="bg-gray-100 px-3 py-1 rounded-full text-sm hover:bg-gray-200"
                       >
                         {edition}
@@ -107,7 +107,7 @@ export default async function PostPage({ params }) {
                   {post.tags.map((tag) => (
                     <Link
                       key={tag}
-                      href={`/shop?tag=${encodeURIComponent(tag)}`}
+                      href={`/shop?tags=${encodeURIComponent(tag)}`}
                       className="border border-white px-3 py-1 rounded-full text-sm hover:bg-gray-100"
                     >
                       {tag}

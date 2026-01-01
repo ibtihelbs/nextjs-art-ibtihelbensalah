@@ -6,55 +6,79 @@ import { XlTitle } from "../components/Text";
 export default async function IndexPage({ searchParams }) {
   const resolvedParams = await searchParams;
   const [key, value] = Object.entries(resolvedParams || {})[0] || [];
-
   const buildQuery = () => {
-    const baseQuery = `*[_type == "artwork"]{
-  _id,
-  title,
-  slug,
-  category,
-  medium,
-  price,
-  sold,
-  image,
-  additionalImages
-}`;
+    const baseFields = `
+    _id,
+    title,
+    slug,
+    category,
+    medium,
+    editions,
+    price,
+    sold,
+    image,
+    gallery,
+    tags
+  `;
 
     if (!key || !value) {
-      return baseQuery;
+      return {
+        query: `*[
+        _type == "artwork"
+        && defined(slug.current)
+      ]{${baseFields}} | order(_createdAt desc)[0...12]`,
+        params: {},
+      };
     }
 
-    // Fields that are arrays and should use 'in' operator
-    const arrayFields = ["tags", "categories", "materials"];
+    let query = "";
+    let params = { filterValue: value };
 
-    // Check if the key is an array field
-    const isArrayField = arrayFields.includes(key);
+    // ARRAY FIELDS
+    if (key === "tags" || key === "editions") {
+      query = `*[
+      _type == "artwork"
+      && defined(slug.current)
+      && count(${key}[@ match $filterValue]) > 0
+    ]{${baseFields}} | order(_createdAt desc)[0...12]`;
+    }
 
-    // Build the filter condition based on field type
-    const filterCondition = isArrayField
-      ? `"${value}" in ${key}`
-      : `${key} match "*${value}*"`;
-    console.log(filterCondition);
-    return `*[
-    _type == "artwork"
-    && defined(slug.current)
-    && ${filterCondition}
-  ]{
-  _id,
-  title,
-  slug,
-  category,
-  medium,
-  price,
-  sold,
-  image,
-  additionalImages
-}|order(_updatedAt desc)[0...12]`;
+    // STRING FIELDS
+    else if (key === "category" || key === "medium") {
+      query = `*[
+      _type == "artwork"
+      && defined(slug.current)
+      && ${key} == $filterValue
+    ]{${baseFields}} | order(_createdAt desc)[0...12]`;
+    }
+    // BOOLEAN FIELDS
+    else if (key === "sold") {
+      const boolValue = value === "true";
+      query = `*[
+      _type == "artwork"
+      && defined(slug.current)
+      && ${key} == ${boolValue}
+    ]{${baseFields}} | order(_createdAt desc)[0...12]`;
+      params = {}; // Don't need params for boolean
+    }
+    // DEFAULT
+    else {
+      query = `*[
+      _type == "artwork"
+      && defined(slug.current)
+    ]{${baseFields}} | order(_createdAt desc)[0...12]`;
+      params = {};
+    }
+
+    return { query, params };
   };
 
-  const query = buildQuery();
-  const artworks = await client.fetch(query, {}, { next: { revalidate: 30 } });
-  console.log(artworks);
+  // Usage in your component:
+  const queryConfig = buildQuery();
+  const artworks = await client.fetch(queryConfig.query, queryConfig.params, {
+    next: { revalidate: 30 },
+  });
+
   return (
     <main className="container mx-auto min-h-screen px-4">
       {value && (
@@ -75,7 +99,7 @@ export default async function IndexPage({ searchParams }) {
           {artworks.map((artwork) => (
             <li
               key={artwork._id}
-              className="grid gap-1 items-start border rounded-lg overflow-hidden hover:shadow-lg transition-shadow"
+              className="grid gap-1 items-start border rounded-lg overflow-hidden hover:shadow-lg transition-shadow relative"
             >
               {artwork.image && (
                 <img
@@ -84,7 +108,11 @@ export default async function IndexPage({ searchParams }) {
                   className="w-full h-[300px] object-cover"
                 />
               )}
-
+              {artwork.sold == true && (
+                <span className="bg-red-700 text-amber-50 absolute top-1 right-1 px-2 py-1 rounded-full">
+                  sold
+                </span>
+              )}
               <div className="text-sm flex items-center justify-between px-3 py-2 gap-2 text-gray-500">
                 <Link
                   href={`/shop?category=${artwork.category}`}
