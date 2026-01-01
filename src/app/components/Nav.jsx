@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { XlTitle } from "@/app/components/Text";
+import { XlTitleName } from "@/app/components/Text";
 import { useState } from "react";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 
@@ -70,7 +70,7 @@ const Nav = () => {
         </div>
       </div>
       <div className="middle-nav grid place-content-center">
-        <XlTitle content={"IBTIHEL BEN SALAH"} className={"lg:text-9xl"} />
+        <XlTitleName content={"IBTIHEL BEN SALAH"} className={"lg:text-9xl"} />
       </div>
       <hr />
 

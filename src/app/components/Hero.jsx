@@ -2,7 +2,7 @@ import Image from "next/image";
 import { client } from "@/sanity/client";
 import { PortableText } from "@portabletext/react";
 import { urlFor } from "@/sanity/imageUrl";
-import { Title } from "./Text";
+import { Title, XlTitle } from "./Text";
 import Link from "next/link";
 const Hero = async () => {
   const query = `*[_type == "blog" && slug.current == "mon-calendrier-tunisien-2026-12-peintures-gouache-12-mois-de-voyage"][0] {
@@ -28,15 +28,15 @@ const Hero = async () => {
                 src={urlFor(blog.image).width().url()}
                 alt="blog"
                 fill
-                className="object-cover"
+                className="object-cover "
               />
-              <Title
+              <XlTitle
                 content={blog.title}
                 className={
-                  "text-start lg:text-6xl absolute top-1/3 block md:hidden"
+                  " lg:text-6xl absolute top-1.5 text-3xl block md:hidden text-center bg-white"
                 }
               />
-              <div className="block md:hidden absolute bottom-0.5 right-0.5">
+              <div className="block md:hidden absolute  bottom-0.5 right-0.5">
                 <Link
                   href={"./blog/" + blog.slug.current}
                   className=" border-solid border-2 rounded-full float-right px-4 py-1 bg-white"
