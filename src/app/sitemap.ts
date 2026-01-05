@@ -1,94 +1,113 @@
 import { MetadataRoute } from "next";
+import { client } from "@/sanity/client"; // Adjust path to your Sanity client
 
-async function getBlogSlugs(): Promise<string[]> {
-  return [
-    "mon-calendrier-tunisien-2026-12-peintures-gouache-12-mois-de-voyage",
-    "colors-of-tunisia-exhibiting-watercolors-in-the-historic-medina",
-  ];
+type ContentItem = {
+  slug: string;
+  _updatedAt: string;
+  publishedAt?: string;
+};
+
+async function getBlogPosts(): Promise<ContentItem[]> {
+  const query = `*[_type == "blog"] {
+    "slug": slug.current,
+    _updatedAt,
+    publishedAt
+  }`;
+
+  return await client.fetch(query);
 }
 
-async function getShopSlugs(): Promise<string[]> {
-  return [
-    "tranquillity-peinture-acrylique-sur-toile",
-    "echoes-of-tunis-tableau-peinture-acrylic-80x60-cm",
-    "tunisian-courtyard-with-horseshoe-arches",
-    "beyon-blue-doors-dar-annebi-tunis-carthage",
-  ];
+async function getArtworks(): Promise<ContentItem[]> {
+  const query = `*[_type == "artwork" && defined(slug.current)] {
+    "slug": slug.current,
+    _updatedAt,
+    _createdAt
+  }`;
+
+  return await client.fetch(query);
 }
 
-async function getPortfolioSlugs(): Promise<string[]> {
-  return ["dessert-and-coffee-collection-2021"];
+async function getPortfolioProjects(): Promise<ContentItem[]> {
+  const query = `*[_type == "portfolio"] {
+    "slug": slug.current,
+    _updatedAt,
+    publishedAt
+  }`;
+
+  return await client.fetch(query);
 }
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  type SitemapItem = {
-    url: string;
-    lastModified?: string | Date | undefined;
-    changeFrequency?:
-      | "weekly"
-      | "always"
-      | "hourly"
-      | "daily"
-      | "monthly"
-      | "yearly"
-      | "never"
-      | undefined;
-    priority?: number | undefined;
-  };
   const baseUrl = "https://ibtihelbensalah-art.vercel.app";
   const now = new Date();
 
-  const blogSlugs = await getBlogSlugs();
-  const shopSlugs = await getShopSlugs();
-  const portfolioSlugs = await getPortfolioSlugs();
+  // Fetch all content from Sanity
+  const [blogPosts, artworks, portfolioProjects] = await Promise.all([
+    getBlogPosts(),
+    getArtworks(),
+    getPortfolioProjects(),
+  ]);
 
   return [
     // Static pages
     {
       url: baseUrl,
       lastModified: now,
-      changeFrequency: "weekly",
+      changeFrequency: "weekly" as const,
       priority: 1,
+    },
+    {
+      url: `${baseUrl}/about`,
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/contact`,
+      lastModified: now,
+      changeFrequency: "yearly" as const,
+      priority: 0.7,
     },
     {
       url: `${baseUrl}/portfolio`,
       lastModified: now,
-      changeFrequency: "monthly",
+      changeFrequency: "monthly" as const,
       priority: 0.9,
     },
     {
       url: `${baseUrl}/shop`,
       lastModified: now,
-      changeFrequency: "weekly",
+      changeFrequency: "weekly" as const,
       priority: 0.9,
     },
     {
       url: `${baseUrl}/blog`,
       lastModified: now,
-      changeFrequency: "weekly",
+      changeFrequency: "weekly" as const,
       priority: 0.8,
     },
 
-    // Blog posts
-    ...blogSlugs.map<SitemapItem>((slug) => ({
-      url: `${baseUrl}/blog/${slug}`,
-      lastModified: now,
-      changeFrequency: "monthly",
+    // Blog posts - use actual Sanity update dates
+    ...blogPosts.map((post) => ({
+      url: `${baseUrl}/blog/${post.slug}`,
+      lastModified: new Date(post.publishedAt || post._updatedAt),
+      changeFrequency: "monthly" as const,
       priority: 0.7,
     })),
 
-    // Shop products
-    ...shopSlugs.map<SitemapItem>((slug) => ({
-      url: `${baseUrl}/shop/${slug}`,
-      lastModified: now,
-      changeFrequency: "weekly",
+    // Artworks (shop) - use actual Sanity update dates
+    ...artworks.map((artwork) => ({
+      url: `${baseUrl}/shop/${artwork.slug}`,
+      lastModified: new Date(artwork._updatedAt),
+      changeFrequency: "weekly" as const,
       priority: 0.8,
     })),
 
-    // Portfolio projects
-    ...portfolioSlugs.map<SitemapItem>((slug) => ({
-      url: `${baseUrl}/portfolio/${slug}`,
-      lastModified: now,
-      changeFrequency: "yearly",
+    // Portfolio projects - use actual Sanity update dates
+    ...portfolioProjects.map((project) => ({
+      url: `${baseUrl}/portfolio/${project.slug}`,
+      lastModified: new Date(project.publishedAt || project._updatedAt),
+      changeFrequency: "yearly" as const,
       priority: 0.7,
     })),
   ];
