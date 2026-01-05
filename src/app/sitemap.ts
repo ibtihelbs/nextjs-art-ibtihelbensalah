@@ -26,7 +26,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       | undefined;
     priority?: number | undefined;
   };
-  const baseUrl = "https://nextjs-art-ibtihelbensalah.vercel.app";
+  const baseUrl = "https://ibtihelbensalah-art.vercel.app";
   const now = new Date();
 
   const blogSlugs = await getBlogSlugs();
