@@ -38,8 +38,8 @@ export default function RootLayout({
         <Nav />
         {children}
         <Footer />
-        <GoogleAnalytics gaId="G-784201359" />
-        <GoogleTagManager gtmId="GTM-N58ZPTP8" />
+        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_G_ID || ""} />
+        <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID || ""} />
       </body>
     </html>
   );
