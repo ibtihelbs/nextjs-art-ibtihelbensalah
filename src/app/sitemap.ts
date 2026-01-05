@@ -1,15 +1,23 @@
 import { MetadataRoute } from "next";
 
 async function getBlogSlugs(): Promise<string[]> {
-  return ["post-one", "post-two"];
+  return [
+    "mon-calendrier-tunisien-2026-12-peintures-gouache-12-mois-de-voyage",
+    "colors-of-tunisia-exhibiting-watercolors-in-the-historic-medina",
+  ];
 }
 
 async function getShopSlugs(): Promise<string[]> {
-  return ["product-one", "product-two"];
+  return [
+    "tranquillity-peinture-acrylique-sur-toile",
+    "echoes-of-tunis-tableau-peinture-acrylic-80x60-cm",
+    "tunisian-courtyard-with-horseshoe-arches",
+    "beyon-blue-doors-dar-annebi-tunis-carthage",
+  ];
 }
 
 async function getPortfolioSlugs(): Promise<string[]> {
-  return ["project-one", "project-two"];
+  return ["dessert-and-coffee-collection-2021"];
 }
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   type SitemapItem = {
