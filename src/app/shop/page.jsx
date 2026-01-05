@@ -2,7 +2,7 @@ import Link from "next/link";
 import { client } from "@/sanity/client";
 import { urlFor } from "@/sanity/imageUrl";
 import { XlTitle } from "../components/Text";
-
+import { LinkTracking } from "./ShopTracking";
 export default async function IndexPage({ searchParams }) {
   const resolvedParams = await searchParams;
   const [key, value] = Object.entries(resolvedParams || {})[0] || [];
@@ -137,13 +137,7 @@ export default async function IndexPage({ searchParams }) {
                       ? "Free"
                       : `${artwork.price.toFixed(2)} dt`}
                   </h2>
-
-                  <Link
-                    href={`/shop/${artwork.slug.current}`}
-                    className="px-3 py-1.5 capitalize text-sm font-black rounded-full border border-black hover:bg-black hover:text-white transition-colors"
-                  >
-                    details
-                  </Link>
+                  <LinkTracking track={artwork.slug.current} id={artwork._id} />
                 </div>
               </div>
             </li>
