@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://nextjs-art-ibtihelbensalah.vercel.app/sitemap.xml
+Sitemap: https://ibtihelbensalah-art.vercel.app/sitemap.xml
