@@ -202,7 +202,7 @@ const page = async ({ params }) => {
           </a>
         </div>
         <p className="text-sm text-gray-500">
-          Contactez-moi directement pour discuter de votre projet
+          Contactez-moi directement pour discuter de votre projet !
         </p>
       </section>
     </article>
