@@ -89,7 +89,7 @@ const Nav = () => {
             <Link href={"/shop"}>shop</Link>
           </li>
           <li>
-            <Link href={"/#contact"}>contact</Link>
+            <Link href={"/commission"}>commission</Link>
           </li>
         </ul>
       </nav>
