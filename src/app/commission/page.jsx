@@ -20,55 +20,69 @@ const page = async () => {
   const commissions = await client.fetch(COMMISSIONS_QUERY, {}, options);
 
   return (
-    <div className="container mx-auto px-4 py-12">
-      <h1 className="text-4xl md:text-6xl font-serif text-center mb-4">
-        Commissions
-      </h1>
-      <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
-        Bespoke artwork created just for you. Choose your style, size, and
-        subject.
-      </p>
+    <main className="container mx-auto min-h-screen px-4">
+      <Link
+        href="/shop"
+        className="text-blue-600 hover:underline inline-block mb-2"
+      >
+        ← back to shop
+      </Link>
 
-      {commissions.length === 0 ? (
-        <p className="text-center text-gray-500">
-          No active commissions at this time.
-        </p>
+      <XlTitle content="commissions" className="lg:text-6xl py-4" />
+
+      {!commissions || commissions.length === 0 ? (
+        <p className="text-gray-500 text-center py-8">No commissions found.</p>
       ) : (
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <ul className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {commissions.map((commission) => (
-            <Link
+            <li
               key={commission._id}
-              href={`/commission/${commission.slug.current}`}
-              className="group block"
+              className="grid gap-1 items-start border rounded-lg overflow-hidden hover:shadow-lg transition-shadow relative"
             >
-              {commission.heroImage && (
-                <div className="relative aspect-[4/3] overflow-hidden rounded-lg mb-4">
+              <Link
+                href={`/commission/${commission.slug.current}`}
+                className="group block relative w-full h-[300px]"
+              >
+                {commission.heroImage && (
                   <Image
-                    src={urlFor(commission.heroImage).width(600).url()}
+                    src={urlFor(commission.heroImage)
+                      .width(800)
+                      .height(600)
+                      .url()}
+                    fill
                     alt={commission.title}
-                    width={600}
-                    height={450}
-                    className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
+                    className="w-full h-[300px] object-cover group-hover:scale-105 transition-transform duration-300"
                   />
-                </div>
-              )}
-              <XlTitle
-                content={commission.title}
-                className="text-xl md:text-2xl text-start"
-              />
-              <p className="text-sm text-gray-500 mt-1 capitalize">
-                {commission.commissionType}
-              </p>
-              {commission.subtitle?.fr && (
-                <p className="text-sm text-gray-600 mt-2">
-                  {commission.subtitle.fr}
-                </p>
-              )}
-            </Link>
+                )}
+              </Link>
+
+              <div className="text-sm flex items-center justify-between px-3 py-2 gap-2 text-gray-500">
+                <span className="capitalize">{commission.commissionType}</span>
+                <hr className="flex-1 border-t-2 border-black rounded-full" />
+                <span className="text-xs text-gray-400">commission</span>
+              </div>
+
+              <div className="grid gap-2 px-3 pb-3">
+                <XlTitle content={commission.title} />
+                {commission.subtitle?.fr && (
+                  <div className="flex justify-between">
+                    <p className="text-sm text-gray-600">
+                      {commission.subtitle.fr}
+                    </p>
+                    <Link
+                      href={`/commission/${commission.slug.current}`}
+                      className="px-3 py-1.5 capitalize text-sm font-black rounded-full border border-black hover:bg-black hover:text-white transition-colors"
+                    >
+                      details
+                    </Link>
+                  </div>
+                )}
+              </div>
+            </li>
           ))}
-        </div>
+        </ul>
       )}
-    </div>
+    </main>
   );
 };
 
