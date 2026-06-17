@@ -108,7 +108,7 @@ export default async function IndexPage({ searchParams }) {
                 {artwork.image && (
                   <img
                     src={urlFor(artwork.image).width(800).height(600).url()}
-                    alt={artwork.title}
+                    alt={artwork.title || artwork.image.alt || "Artwork image"}
                     className="w-full h-[300px] object-cover"
                   />
                 )}
