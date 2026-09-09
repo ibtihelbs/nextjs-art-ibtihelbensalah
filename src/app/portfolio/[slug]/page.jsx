@@ -5,7 +5,7 @@ import { urlFor } from "@/sanity/imageUrl";
 import { XlTitle } from "@/app/components/Text";
 import { notFound } from "next/navigation";
 import { PortableText } from "@portabletext/react";
-
+import ExtraImage from "@/app/components/ExtraImage";
 export async function generateStaticParams() {
   const projects = await client.fetch(`*[_type == "portfolio"]{ slug }`);
   return projects.map((project) => ({
@@ -32,7 +32,7 @@ export default async function ProjectPage({ params }) {
   const project = await client.fetch(
     PROJECT_QUERY,
     { slug },
-    { next: { revalidate: 30 } }
+    { next: { revalidate: 30 } },
   );
 
   if (!project) {
@@ -142,24 +142,10 @@ export default async function ProjectPage({ params }) {
         {project.extraImages && project.extraImages.length > 0 && (
           <section className="mt-12">
             <h2 className="text-3xl font-bold mb-6">Project Gallery</h2>
-            <div className="grid md:grid-cols-2 gap-4">
-              {project.extraImages
-                .filter((image) => image?.asset?._ref) // Only include valid images
-                .map((image, idx) => (
-                  <div
-                    key={idx}
-                    className="relative h-80 rounded-lg overflow-hidden"
-                  >
-                    <Image
-                      src={urlFor(image).width(800).height(600).url()}
-                      alt={`${project.title} - Image ${idx + 1}`}
-                      fill
-                      className="object-cover hover:scale-105 transition-transform duration-300"
-                      sizes="(max-width: 768px) 100vw, 50vw"
-                    />
-                  </div>
-                ))}
-            </div>
+            <ExtraImage
+              extraImages={project.extraImages}
+              projectTitle={project.title}
+            />
           </section>
         )}
       </article>
