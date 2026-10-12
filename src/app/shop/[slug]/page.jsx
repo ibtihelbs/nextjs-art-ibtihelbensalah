@@ -36,7 +36,28 @@ const WhatsAppButton = ({ postTitle, pageUrl }) => {
     </a>
   );
 };
-
+// Portable Text components for rich text rendering
+const components = {
+  block: {
+    h2: ({ children }) => (
+      <h2 className="text-3xl font-bold mt-8 mb-4">{children}</h2>
+    ),
+    h3: ({ children }) => (
+      <h3 className="text-2xl font-bold mt-6 mb-3">{children}</h3>
+    ),
+    normal: ({ children }) => (
+      <p className="mb-4 leading-relaxed">{children}</p>
+    ),
+  },
+  list: {
+    bullet: ({ children }) => (
+      <ul className="list-disc list-inside mb-4 space-y-2">{children}</ul>
+    ),
+    number: ({ children }) => (
+      <ol className="list-decimal list-inside mb-4 space-y-2">{children}</ol>
+    ),
+  },
+};
 // Instagram Button Component
 const InstagramButton = ({ postTitle, pageUrl }) => {
   const instagramUsername = "paintings.by.ibs";
