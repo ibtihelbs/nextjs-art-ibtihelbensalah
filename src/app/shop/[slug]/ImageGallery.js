@@ -13,12 +13,16 @@ export default function ImageGallery({
   return (
     <>
       {mainImage && (
-        <div className="relative h-full" onClick={() => setModalOpen(true)}>
+        <div
+          className="relative h-full w-full overflow-hidden rounded-lg cursor-pointer"
+          onClick={() => setModalOpen(true)}
+        >
           <Image
             src={mainImage.src}
-            alt={mainImage.alt}
+            alt={mainImage.alt || "Image"}
             fill
-            className="object-cover w-full h-full rounded-lg"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            className="object-cover"
             priority
           />
         </div>
