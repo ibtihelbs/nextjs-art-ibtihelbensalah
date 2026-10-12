@@ -13,7 +13,7 @@ export default function ImageGallery({
   return (
     <>
       {mainImage && (
-        <div className="relative h-[50vh]" onClick={() => setModalOpen(true)}>
+        <div className="relative h-full" onClick={() => setModalOpen(true)}>
           <Image
             src={mainImage.src}
             alt={mainImage.alt}
