@@ -18,7 +18,7 @@ export default function ImageGallery({
             src={mainImage.src}
             alt={mainImage.alt}
             fill
-            className="object-cover w-full rounded-lg"
+            className="object-cover w-full h-full rounded-lg"
             priority
           />
         </div>
