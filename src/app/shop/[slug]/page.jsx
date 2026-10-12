@@ -6,10 +6,10 @@ import Download from "@/app/components/Download";
 import { XlTitle, Title } from "@/app/components/Text";
 import Image from "next/image";
 import ImageGallery from "./ImageGallery";
+import { PortableText } from "@portabletext/react";
 const { projectId, dataset } = client.config();
 const builder = imageUrlBuilder({ projectId, dataset });
 const urlFor = (source) => (source ? builder.image(source) : null);
-
 // WhatsApp Button Component
 const WhatsAppButton = ({ postTitle, pageUrl }) => {
   const phoneNumber = "21692398964";
@@ -142,9 +142,15 @@ export default async function PostPage({ params }) {
           </div>
 
           <div className="grid gap-2">
-            {post.description?.split(".").map((p, index) => (
-              <p key={index}>{p}.</p>
-            ))}
+            {/* Content */}
+            {post.description && (
+              <div className="prose prose-lg max-w-none mb-12">
+                <PortableText
+                  value={post.description}
+                  components={components}
+                />
+              </div>
+            )}
 
             {/* Social Buttons Section */}
 
