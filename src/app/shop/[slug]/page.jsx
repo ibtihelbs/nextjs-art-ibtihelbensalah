@@ -4,7 +4,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Download from "@/app/components/Download";
 import { XlTitle, Title } from "@/app/components/Text";
-import Image from "next/image";
 import ImageGallery from "./ImageGallery";
 import { PortableText } from "@portabletext/react";
 const { projectId, dataset } = client.config();
