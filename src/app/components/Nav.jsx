@@ -13,11 +13,11 @@ const socialLinks = [
   },
   {
     src: "/png/002-instagram.png",
-    href: "https://www.instagram.com/stuffed.peanuts",
+    href: "https://www.instagram.com/ibtihelbensalah.art",
   },
   {
     src: "/png/002-instagram.png",
-    href: "https://www.instagram.com/paintings.by.ibs",
+    href: "https://www.instagram.com/ibtihelbensalah.tn",
   },
   {
     src: "/png/007-pinterest-1.png",
